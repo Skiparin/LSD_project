@@ -1,1 +1,23 @@
 # LSD_project
+
+### **Tools**
+- Database: Postgress
+- API: "To be filled" 
+- Programming Language: Python3
+- OS: Linux
+- Test: "To be filled"
+- Security "To be filled"
+
+### **Functional requirements**
+As a user I want to register an account, so ...
+As a user I want to log in, so i can post stories and write comments.
+As a user I want to post stories, so ...
+As a user I want to comment on posts, so ...
+As a user I want to upvote and downvote comments, so ...
+As a user I want to reply on comments, so ...
+As a user I want to have a collection of points, so ...
+As a user I want to flag content for spam, so ...
+
+### **Non-functional requirements**
+The application should be operating atleast 95% of the time.
+While application is under maintenance there should be a mechanism buffering incomming content.

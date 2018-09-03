@@ -5,12 +5,12 @@
 - API: "To be filled" 
 - Programming Language: Python3
 - OS: Linux
-- Test: "To be filled"
+- Test: Unittest & Selenium
 - Security "To be filled"
 
 ### **Functional requirements**
 - As a user I want to register an account, so ...
-- As a user I want to log in, so i can post stories and write comments.
+- As a user I want to log in, so I can post stories and write comments.
 - As a user I want to post stories, so ...
 - As a user I want to comment on posts, so ...
 - As a user I want to upvote and downvote comments, so ...

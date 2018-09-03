@@ -21,4 +21,4 @@
 
 ### **Non-functional requirements**
 - The application should be operating atleast 95% of the time.
-- While application is under maintenance there should be a mechanism buffering incomming content.
+- While the application is under maintenance, there should be a mechanism buffering incomming content.

@@ -9,6 +9,7 @@
 - OS: Linux
 - Test: Unittest & Selenium
 - Security "To be filled"
+- Development method: Scrum
 
 ### **Functional requirements**
 - As a user I want to register an account, so I can log in to my account.

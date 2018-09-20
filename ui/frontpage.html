@@ -1,6 +1,7 @@
 <html op="news">
 <head>
-	<meta name="referrer" content="origin"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" type="text/css" href="news.css?3Cvcmq07WTwdeF9jDIvP">
+	<meta name="referrer" content="origin"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="news.css?3Cvcmq07WTwdeF9jDIvP">
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="rss">
 	<title>Hacker News</title>
@@ -42,7 +43,7 @@
 		<table class="itemlist" cellspacing="0" cellpadding="0" border="0">
 			<tbody>
 				{% for post in posts %}
-				<tr id={{post_id}} class="athing">
+				<tr id="{{post_id}}" class="posts">
 					<td class="rank_title" valign="top" align="right">
 						<span class="rank">
 							{{post_rank}}
@@ -50,13 +51,13 @@
 					</td>
 					<td class="votelinks" valign="top">
 						<center>
-							<a id='up_{{post_id}}' onclick='return vote(event, this, "up")' href={{upvote_url}}>
+							<a id='up_{{post_id}}' onclick='return vote(event, this, "up")' href="upvotevote{{post_id}}">
 								<div class='votearrow' title='upvote'></div>
 							</a>
 						</center>
 					</td>
 					<td class="story_title">
-						<a class="storylink" href={{storylink_url}}>
+						<a class="storylink" href="{{storylink_url}}">
 							{{post_storylink}}
 						</a>
 						<span class="sitebit_comhead">
@@ -71,14 +72,14 @@
 				<tr>
 					<td colspan="2"></td>
 					<td class="subtext">
-						<span id={{post_score_id}} class="score">{{score}}</span>
+						<span id="score={{post_id}}" class="score">{{score}}</span>
 						by
 						<a class="hnuser" href={{post_author}} >{{post_author}}</a>
 						<span class="age">
-							<a href={{post_id}}>{{post_age}}</a>
+							<a href="age={{post_id}}">{{post_age}}</a>
 						</span>
-						| <a href={{hide_post_id}} onclick="return hidestory(event, this, {post_id})">hide</a>
-						| <a href={{post_id}}>{{post_comments_nr}} comments</a>
+						| <a href="hide={{post_id}}" onclick="return hidestory(event, this, {post_id})">hide</a>
+						| <a href="id={{post_id}}">{{post_comments_nr}} comments</a>
 					</td>
 				</tr>
 				<tr class="space" style="height: 5px"></tr>

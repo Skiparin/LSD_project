@@ -9,7 +9,7 @@ class TestUbuntuHomepage(unittest.TestCase):
     def setUp(self):
         options = Options()
         options.add_argument("--headless")
-        self.browser = webdriver.Firefox(firefox_options=options, executable_path="/Users/laurahartig/Webdriver/geckodriver")
+        self.browser = webdriver.Firefox(options=options, executable_path="/usr/bin/geckodriver")
 
     def testTitle(self):
         self.browser.get('http://www.ubuntu.com/')
@@ -17,7 +17,6 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def tearDown(self):
         self.browser.quit()
-
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

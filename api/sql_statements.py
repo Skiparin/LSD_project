@@ -1,4 +1,5 @@
-comments_from_post = f"""
+def comments_from_post(post_id):
+    return f"""
     WITH RECURSIVE cte (id, content, username, path, parent_id, depth, karma)  AS (
     SELECT  
         comments.id,

@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import render_template
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 import json
@@ -64,7 +65,7 @@ def sort_posts():
     jobject = posts()
     post_list = json.loads(jobject)
     print(post_list[0])
-    return str(post_list)
+    return render_template('frontpage.html', post_list)
 
 
 

@@ -64,7 +64,7 @@ def sort_posts():
     jobject = posts()
     post_list = json.loads(jobject)
     print(post_list[0])
-    return post_list
+    return str(post_list)
 
 
 

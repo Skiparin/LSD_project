@@ -65,6 +65,7 @@ def comments():
             ON comments.user_id = users.id
         )
     WHERE parent_id IS NULL
+        and post_id =  {post_id}
     UNION ALL
     SELECT
         comments.id,

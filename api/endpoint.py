@@ -55,6 +55,19 @@ def comments():
     con.close()
     return json_list
 
+@app.route('/comment')
+def comment():
+    #a = request.get.body()
+    #comment = a.get('comment')
+    #post_id = a.get('post_id')
+    #parrent_id = a.get('parrent_id')
+    #user_id = a.get('user_id')
+    # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
+    con = db_connect(engine) 
+    sqlalchemy_object = con.execute(sql_statement)
+    con.close()
+    return 201
+
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 

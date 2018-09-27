@@ -31,7 +31,7 @@ def posts():
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)
     con.close()
-    return sort_posts
+    return json_list
 
 @app.route('/login')
 def login():
@@ -59,7 +59,7 @@ def sqlalchemy_json(dictionary):
 
 
 
-
+@app.route('/sortedposts')
 def sort_posts():
     jobject = posts()
     post_list = json.loads(jobject)
@@ -72,4 +72,4 @@ def sort_posts():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0")
+    app.run(debug=True,host="0.0.0.0", port=5001)

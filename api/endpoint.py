@@ -45,7 +45,7 @@ def login():
     return json_list
 
 @app.route('/comments')
-def comments(post_id):
+def comments():
     post_id = request.args.get('post_id')
     sql_statement = f"select * comments from comments where post_id = '{post_id}'"
     con = db_connect(engine) 

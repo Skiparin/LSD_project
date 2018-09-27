@@ -48,7 +48,7 @@ def login():
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_statement = ss.comments_from_post
+    sql_statement = ss.comments_from_post(post_id)
     con = db_connect(engine) 
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)

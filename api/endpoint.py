@@ -64,8 +64,7 @@ def sqlalchemy_json(dictionary):
 def sort_posts():
     jobject = posts()
     post_list = json.loads(jobject)
-    print(post_list[0])
-    return render_template('frontpage.html', post_list)
+    return render_template('frontpage.html', post_list=post_list)
 
 
 

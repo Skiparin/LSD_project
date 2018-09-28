@@ -42,28 +42,28 @@
 			</tr>
 			<table class="itemlist" cellspacing="0" cellpadding="0" border="0">
 				<tbody>
-					{% for post_id, post_rank, post_storylink, sister_url, score, post_author, post_age, post_comment_nr in posts_list %}
-					<tr id="{{post_id}}" class="posts">
+					{% for id, content, <!--sister_url,--> karma_id, user_id, modified_on, <!--post_comments_nr--> in posts_list %}
+					<tr id="{{id}}" class="posts">
 						<td class="rank_title" valign="top" align="right">
 							<span class="rank">
-								{{post_rank}}
+								0
 							</span>
 						</td>
 						<td class="votelinks" valign="top">
 							<center>
-								<a id='upvote={{post_id}}' onclick='return vote(event, this, "up")'href="upvotevote{{post_id}}">
+								<a id='upvote={{id}}' onclick='return vote(event, this, "up")'href="upvotevote{{id}}">
 									<div class='votearrow' title='upvote'></div>
 								</a>
 							</center>
 						</td>
 						<td class="story_title">
 							<a class="storylink" href="{{storylink_url}}">
-								{{post_storylink}}
+								{{content}}
 							</a>
 							<span class="sitebit_comhead">
 								(<a href="{{sitebit_url}}">
 									<span class="sitestr">
-										{{sitestr_url}}
+										<!--{{sitestr_url}}-->
 									</span>
 								</a>)
 							</span>
@@ -72,14 +72,14 @@
 					<tr>
 						<td colspan="2"></td>
 						<td class="subtext">
-							<span id="score={{post_id}}" class="score">{{score}}</span>
+							<span id="karma_id={{id}}" class="karma_id">{{karma_id}}</span>
 							by
-							<a class="hnuser" href={{post_author}} >{{post_author}}</a>
+							<a class="hnuser" href={{user_id}} >{{user_id}}</a>
 							<span class="age">
-								<a href="age={{post_id}}">{{post_age}}</a>
+								<a href="age={{id}}">{{modified_on}}</a>
 							</span>
-							| <a href="hide={{post_id}}" onclick="return hidestory(event, this, {post_id})">hide</a>
-							| <a href="id={{post_id}}">{{post_comments_nr}} comments</a>
+							| <a href="hide={{id}}" onclick="return hidestory(event, this, {id})">hide</a>
+							| <a href="id={{id}}"><!--{{post_comments_nr}}--> comments</a>
 						</td>
 					</tr>
 					<tr class="space" style="height: 5px"></tr>

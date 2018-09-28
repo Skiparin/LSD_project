@@ -44,7 +44,8 @@
 				<tbody>
 					<!--sister_url,-->
 					<!--post_comments_nr-->
-					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in post_dict.itervalues() %}
+					{% for dict in post_dict %}
+					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in dict %}
 					<tr>
 						<td valign="top" align="right">
 							<span>
@@ -85,6 +86,7 @@
 						</td>
 					</tr>
 					<tr style="height: 5px"></tr>
+					{%endfor%}
 					{%endfor%}
 				</tbody>
 			</table>

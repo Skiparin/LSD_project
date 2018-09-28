@@ -44,6 +44,7 @@
 				<tbody>
 					<!--sister_url,-->
 					<!--post_comments_nr-->
+					<!--id, content, is_link, karma_id, user_id, created_on, modified_on-->
 					{% for dict in post_list %}
 						{% for key, value in dict.items() %}
 						<tr>
@@ -61,12 +62,12 @@
 							</td>
 							<td>
 								<a>
-									{{content}}
+									key:{key} <!--{{content}}-->
 								</a>
 								<span>
 									(<a>
 										<span>
-											{{is_link}}<!--{{sitestr_url}}-->
+											value: {value}<!--{{is_link}}--><!--{{sitestr_url}}-->
 										</span>
 									</a>)
 								</span>

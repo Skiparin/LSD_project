@@ -44,7 +44,7 @@
 				<tbody>
 					<!--sister_url,-->
 					<!--post_comments_nr-->
-					{% for id, content, karma_id, user_id, modified_on in post_list.iteritems() %}
+					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in post_list %}
 					<tr>
 						<td valign="top" align="right">
 							<span>
@@ -65,7 +65,7 @@
 							<span>
 								(<a>
 									<span>
-										sitestr_url<!--{{sitestr_url}}-->
+										sitestr_url {{is_link}}<!--{{sitestr_url}}-->
 									</span>
 								</a>)
 							</span>
@@ -78,6 +78,7 @@
 							by
 							<a>{{user_id}}</a>
 							<span>
+								<a>{{created_on}}</a>
 								<a>{{modified_on}}</a>
 							</span>
 							| <a>hide</a>

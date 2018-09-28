@@ -45,48 +45,48 @@
 					<!--sister_url,-->
 					<!--post_comments_nr-->
 					{% for dict in post_list %}
-					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in dict.items() %}
-					<tr>
-						<td valign="top" align="right">
-							<span>
-								0
-							</span>
-						</td>
-						<td valign="top">
-							<center>
+						{% for id, content, is_link, karma_id, user_id, created_on, modified_on in dict.items() %}
+						<tr>
+							<td valign="top" align="right">
+								<span>
+									0
+								</span>
+							</td>
+							<td valign="top">
+								<center>
+									<a>
+										<div></div>
+									</a>
+								</center>
+							</td>
+							<td>
 								<a>
-									<div></div>
+									{{content}}
 								</a>
-							</center>
-						</td>
-						<td>
-							<a>
-								{{content}}
-							</a>
-							<span>
-								(<a>
-									<span>
-										{{is_link}}<!--{{sitestr_url}}-->
-									</span>
-								</a>)
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2"></td>
-						<td>
-							<span>{{karma_id}}</span>
-							by
-							<a>{{user_id}}</a>
-							<span>
-								<a>{{created_on}}</a>
-							</span>
-							| <a>hide</a>
-							| <a><!--{{post_comments_nr}}--> comments</a>
-						</td>
-					</tr>
-					<tr style="height: 5px"></tr>
-					{%endfor%}
+								<span>
+									(<a>
+										<span>
+											{{is_link}}<!--{{sitestr_url}}-->
+										</span>
+									</a>)
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"></td>
+							<td>
+								<span>{{karma_id}}</span>
+								by
+								<a>{{user_id}}</a>
+								<span>
+									<a>{{created_on}}</a>
+								</span>
+								| <a>hide</a>
+								| <a><!--{{post_comments_nr}}--> comments</a>
+							</td>
+						</tr>
+						<tr style="height: 5px"></tr>
+						{%endfor%}
 					{%endfor%}
 				</tbody>
 			</table>

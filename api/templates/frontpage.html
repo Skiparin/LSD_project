@@ -44,7 +44,7 @@
 				<tbody>
 					<!--sister_url,-->
 					<!--post_comments_nr-->
-					{% for id, content, karma_id, user_id, modified_on in post_list.itervalues() %}
+					{% for id, content, karma_id, user_id, modified_on in post_list.iteritems() %}
 					<tr>
 						<td valign="top" align="right">
 							<span>

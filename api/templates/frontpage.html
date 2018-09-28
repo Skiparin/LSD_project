@@ -44,8 +44,8 @@
 				<tbody>
 					<!--sister_url,-->
 					<!--post_comments_nr-->
-					{% for dict in post_dict %}
-					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in dict %}
+					{% for dict in post_list %}
+					{% for id, content, is_link, karma_id, user_id, created_on, modified_on in dict.itervlaues() %}
 					<tr>
 						<td valign="top" align="right">
 							<span>

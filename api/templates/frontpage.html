@@ -45,26 +45,26 @@
 					<!--sister_url,-->
 					<!--post_comments_nr-->
 					{% for id, content, karma_id, user_id, modified_on in posts_list %}
-					<tr id="{{id}}" class="posts">
-						<td class="rank_title" valign="top" align="right">
-							<span class="rank">
+					<tr>
+						<td valign="top" align="right">
+							<span>
 								0
 							</span>
 						</td>
-						<td class="votelinks" valign="top">
+						<td valign="top">
 							<center>
-								<a id='upvote={{id}}' onclick='return vote(event, this, "up")'href="upvotevote{{id}}">
-									<div class='votearrow' title='upvote'></div>
+								<a>
+									<div></div>
 								</a>
 							</center>
 						</td>
-						<td class="story_title">
-							<a class="storylink" href="{{storylink_url}}">
+						<td>
+							<a>
 								{{content}}
 							</a>
-							<span class="sitebit_comhead">
-								(<a href="{{sitebit_url}}">
-									<span class="sitestr">
+							<span>
+								(<a>
+									<span>
 										sitestr_url<!--{{sitestr_url}}-->
 									</span>
 								</a>)
@@ -73,18 +73,18 @@
 					</tr>
 					<tr>
 						<td colspan="2"></td>
-						<td class="subtext">
-							<span id="karma_id={{id}}" class="karma_id">{{karma_id}}</span>
+						<td>
+							<span>{{karma_id}}</span>
 							by
-							<a class="hnuser" href={{user_id}} >{{user_id}}</a>
-							<span class="age">
-								<a href="age={{id}}">{{modified_on}}</a>
+							<a>{{user_id}}</a>
+							<span>
+								<a>{{modified_on}}</a>
 							</span>
-							| <a href="hide={{id}}" onclick="return hidestory(event, this, {id})">hide</a>
-							| <a href="id={{id}}"><!--{{post_comments_nr}}--> comments</a>
+							| <a>hide</a>
+							| <a><!--{{post_comments_nr}}--> comments</a>
 						</td>
 					</tr>
-					<tr class="space" style="height: 5px"></tr>
+					<tr style="height: 5px"></tr>
 					{%endfor%}
 				</tbody>
 			</table>

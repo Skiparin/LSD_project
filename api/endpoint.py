@@ -63,9 +63,9 @@ def sqlalchemy_json(dictionary):
 @app.route('/sortedposts')
 def sort_posts():
     jobject = posts()
-    post_dict = json.loads(jobject)[0]
-    print(str(post_dict))
-    return render_template('frontpage.html', post_list=post_dict)
+    post_dict = json.dumps([dict(r) for r in jobject], default=str)
+    return str(post_dict)
+    #return render_template('frontpage.html', post_list=post_dict)
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0", port=5001)

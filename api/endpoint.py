@@ -63,7 +63,7 @@ def sqlalchemy_json(dictionary):
 @app.route('/sortedposts')
 def sort_posts():
     jobject = posts()
-    post_dict = json.loads(jobject)[0]
+    post_dict = json.loads(jobject)([dict(obj) for obj in jobject])
     return str(post_dict)
     #return render_template('frontpage.html', post_list=post_dict)
 

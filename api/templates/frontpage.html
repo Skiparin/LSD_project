@@ -42,7 +42,7 @@
 			</tr>
 			<table class="itemlist" cellspacing="0" cellpadding="0" border="0">
 				<tbody>
-					{% for post in posts %}
+					{% for post_id, post_rank, post_storylink, sister_url, score, post_author, post_age, post_comment_nr in posts_list %}
 					<tr id="{{post_id}}" class="posts">
 						<td class="rank_title" valign="top" align="right">
 							<span class="rank">

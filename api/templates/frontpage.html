@@ -45,11 +45,10 @@
 					<!--sister_url,-->
 					<!--post_comments_nr-->
 					{% for dict in post_list %}
-						<p> {{dict["id"]}} </p>
 						<tr>
 							<td valign="top" align="right">
 								<span>
-									0
+									{{dict["id"]}}
 								</span>
 							</td>
 							<td valign="top">
@@ -61,12 +60,12 @@
 							</td>
 							<td>
 								<a>
-									{{content}}
+									{{dict["content"]}}
 								</a>
 								<span>
 									(<a>
 										<span>
-											{{is_link}}<!--{{sitestr_url}}-->
+											{{dict["is_link"]}}<!--{{sitestr_url}}-->
 										</span>
 									</a>)
 								</span>
@@ -75,11 +74,11 @@
 						<tr>
 							<td colspan="2"></td>
 							<td>
-								<span>{{karma_id}}</span>
+								<span>{{dict["karma_id"]}}</span>
 								by
-								<a>{{user_id}}</a>
+								<a>{{dict["user_id"]}}</a>
 								<span>
-									<a>{{created_on}}</a>
+									<a>{{dict["created_on"]}}</a>
 								</span>
 								| <a>hide</a>
 								| <a><!--{{post_comments_nr}}--> comments</a>

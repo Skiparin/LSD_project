@@ -36,9 +36,9 @@ def posts():
 
 @app.route('/login')
 def login():
-    username = "orvor"
+    username = "orvur"
     password = "1234"
-    sql_statement = f"select 1 from users where username = '{username}' and passworld = '{password}'"
+    sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
     con = db_connect(engine) 
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)

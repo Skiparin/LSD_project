@@ -24,7 +24,43 @@ def db_connect(engine):
     Makes connections to the database
     """
     return engine.connect()
+@app.route(/'post')
+def post():
+    post = requst.form.get('post_type')
+    answere = ""
+    if(post = "story"):
+        story(request)
+    elif(post = "comment"):
+        comment()
+    elif(post = "poll"):
+        poll()
+    elif(post = "pollopt"):
+        pollopt()
+    return answere
 
+def story(request):
+    json = request.get_json()
+    username = json['username']
+    password = json['pwd_hash']
+    post_title = json['post_title']
+    url = json['post_url']
+    sql_statement = ""
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    json_list = sqlalchemy_json(sqlalchemy_object)
+    con.close()
+    return "story"
+
+    #Post on frontpage
+def comment():
+    return "comment"
+    #Post a comment
+def poll():
+    return "poll"
+    #Poll, just throw away
+def pollopt():
+    return "pollopt"
+    #Poll options, just throw away
 @app.route('/posts')
 def posts():
     sql_statement = "select * from posts"

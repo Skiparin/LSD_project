@@ -44,7 +44,7 @@ def story(request):
     password = json['pwd_hash']
     post_title = json['post_title']
     url = json['post_url']
-    sql_statement = ""
+    sql_statement = ss.login(username,password)
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)

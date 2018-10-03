@@ -46,3 +46,19 @@ def comments_from_post(post_id):
     FROM cte
     ORDER BY path;
     """
+def login(username, password):
+    sql_statement = f"""
+    select 
+        id 
+    from 
+        users 
+    where 
+        username = {username} 
+        and 
+        password = {password}
+    """
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    user_id = sqlalchemy_object.fetchone()[0]
+    con.close()
+    return user_id

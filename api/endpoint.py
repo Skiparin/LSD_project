@@ -1,12 +1,12 @@
 from flask import Flask
+from flask import request
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
-from flask.ext.hashing import Hashing
+import sql_statements as ss
 import json
 
 
 app = Flask(__name__)
-hashing = Hashing(app)
 
 DATABASE_CONNECTION = {
     'drivername': 'postgres',
@@ -27,21 +27,18 @@ def db_connect(engine):
 
 @app.route('/posts')
 def posts():
-	sql_statement = "Select * from posts"
-	con = db_connect(engine)
-	sqlalchemy_object = con.execute(sql_statement)
-	json_list = sqlalchemy_json(sqlalchemy_object)
+    sql_statement = "select * from posts"
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    json_list = sqlalchemy_json(sqlalchemy_object)
     con.close()
-	return json_list
-	"""
-	return json.dumps([dict(r) for r in res])
-	"""
+    return json_list
 
 @app.route('/login')
 def login():
-    username = "orvor"
+    username = "orvur"
     password = "1234"
-    sql_statement = f"Select 1 from users where username = '{username}' and passworld = '{password}'"
+    sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
     con = db_connect(engine) 
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)
@@ -49,13 +46,27 @@ def login():
     return json_list
 
 @app.route('/comments')
-def comments(post_id):
-    sql_statement = f"Select comments from comments where post_id = '{post_id}'"
+def comments():
+    post_id = request.args.get('post_id')
+    sql_statement = ss.comments_from_post(post_id)
     con = db_connect(engine) 
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)
     con.close()
     return json_list
+
+@app.route('/comment')
+def comment():
+    #a = request.get.body()
+    #comment = a.get('comment')
+    #post_id = a.get('post_id')
+    #parrent_id = a.get('parrent_id')
+    #user_id = a.get('user_id')
+    # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
+    con = db_connect(engine) 
+    sqlalchemy_object = con.execute(sql_statement)
+    con.close()
+    return 201
 
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)

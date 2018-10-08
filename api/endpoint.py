@@ -73,7 +73,7 @@ def posts():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if flask.request.method == 'POST':
+    if request.method == 'POST':
         username = "orvur"
         password = "1234"
         sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"

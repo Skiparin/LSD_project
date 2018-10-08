@@ -71,15 +71,18 @@ def posts():
     con.close()
     return json_list
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    username = "orvur"
-    password = "1234"
-    sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
+    if request.methods.post:
+        username = "orvur"
+        password = "1234"
+        sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
+        con = db_connect(engine) 
+        sqlalchemy_object = con.execute(sql_statement)
+        json_list = sqlalchemy_json(sqlalchemy_object)
+        con.close()
+    else:
+        return render_template('login.html')
     return json_list
 
 @app.route('/create', methods=['POST'])

@@ -62,3 +62,12 @@ def login(username, password):
     user_id = sqlalchemy_object.fetchone()[0]
     con.close()
     return user_id
+def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
+    sql_statement = f"""
+    insert into
+        posts(title,content,is_link,user_id,hanesst_id)
+        values {post_title},{post_content},{is_url},{user_id},{hanesst_id}
+    """
+    con = db_connect(engine)
+    con.execute(sql_statement)
+    con.close()

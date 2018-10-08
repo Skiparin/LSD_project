@@ -42,14 +42,19 @@ def story(request):
     json = request.get_json()
     username = json['username']
     password = json['pwd_hash']
-    post_title = json['post_title']
-    url = json['post_url']
-    sql_statement = ss.login(username,password)
-    con = db_connect(engine)
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return "story"
+    user_id = ss.login(username,password)
+    if user_id != None:
+        post_title = json['post_title']
+        hanesst_id = json['hanesst_id']
+        post_content = json['post_url']
+        if post_content == None:
+            is_url = False
+            post_content = json['post_text']
+        else:
+            is_url = True
+        ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+    elif user_id == None:
+        return "Wrong login"
 
     #Post on frontpage
 def comment():

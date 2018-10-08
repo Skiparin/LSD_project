@@ -79,7 +79,7 @@ def create():
     username_taken = ss.check_if_username_is_taken(username)
     if not username_taken:
         ss.insert_user(username, password)
-        return render_template('frontpage.html')
+        return render_template('frontpage.html', username=username)
     else:
         return render_template('login.html')
     return

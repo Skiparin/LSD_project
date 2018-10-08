@@ -83,7 +83,7 @@ def login():
     return json_list
 
 @app.route('/create', methods=['POST'])
-def login():
+def create():
     username = request.form.get('acct')
     password = request.form.get('pw')
     username_taken = ss.check_if_username_is_taken(username)

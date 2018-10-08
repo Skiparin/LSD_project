@@ -58,11 +58,8 @@ def comments():
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
-
-
 @app.route('/sortedposts')
 def sort_posts():
-    post_list = {}
     jobject = posts()
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)

@@ -62,3 +62,33 @@ def login(username, password):
     user_id = sqlalchemy_object.fetchone()[0]
     con.close()
     return user_id
+
+def check_if_username_is_taken(username):
+    sql_statement = f"""
+    select
+        1 
+    from 
+        users 
+    where 
+        username = '{username}'
+    """
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    value = sqlalchemy_object.fetchone()[0]
+    con.close()
+    return value
+
+def insert_user(username, password):
+    sql_statement = f"""
+    insert into 
+        users
+            (
+            username,
+            password
+            )
+    values
+        (
+        {username},
+        {password}
+        )
+    """

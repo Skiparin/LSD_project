@@ -82,6 +82,21 @@ def login():
     con.close()
     return json_list
 
+@app.route('/create', methods=['POST'])
+def login():
+    username = request.form.get('acct')
+    password = request.form.get('pw')
+    username_taken = ss.check_if_username_is_taken(username)
+    if not username_taken:
+        ss.insert_user(username, password)
+    else:
+        return
+    con = db_connect(engine) 
+    sqlalchemy_object = con.execute(sql_statement)
+    json_list = sqlalchemy_json(sqlalchemy_object)
+    con.close()
+    return json_list
+
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')

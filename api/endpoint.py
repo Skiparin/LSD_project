@@ -29,13 +29,13 @@ def db_connect(engine):
 def post():
     post = requst.form.get('post_type')
     answere = ""
-    if(post = "story"):
+    if(post == "story"):
         story(request)
-    elif(post = "comment"):
+    elif(post == "comment"):
         comment()
-    elif(post = "poll"):
+    elif(post == "poll"):
         poll()
-    elif(post = "pollopt"):
+    elif(post == "pollopt"):
         pollopt()
     return answere
 

@@ -1,24 +1,11 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from sqlalchemy import create_engine
-from sqlalchemy.engine.url import URL
 import sql_statements as ss
 import json
 
 
 app = Flask(__name__)
-
-DATABASE_CONNECTION = {
-    'drivername': 'postgres',
-    'port': '5432',
-    'username': 'prod',
-    'database': 'prod',
-}
-"""
-Makes an engine to the database
-"""
-engine = create_engine(URL(**DATABASE_CONNECTION))
 
 def db_connect(engine):
     """
@@ -92,13 +79,10 @@ def create():
     username_taken = ss.check_if_username_is_taken(username)
     if not username_taken:
         ss.insert_user(username, password)
+        return render_template('frontpage.html')
     else:
-        return
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+        return render_template('login.html')
+    return
 
 @app.route('/comments')
 def comments():

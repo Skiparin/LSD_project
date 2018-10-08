@@ -25,7 +25,7 @@ def db_connect(engine):
     Makes connections to the database
     """
     return engine.connect()
-@app.route(/'post')
+@app.route('/post')
 def post():
     post = requst.form.get('post_type')
     answere = ""

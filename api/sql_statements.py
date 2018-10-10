@@ -10,7 +10,7 @@ DATABASE_CONNECTION = {
 """
 Makes an engine to the database
 """
-def create_engine():
+def make_engine():
     engine = create_engine(URL(**DATABASE_CONNECTION))
     return engine
 
@@ -65,7 +65,7 @@ def comments_from_post(post_id):
     FROM cte
     ORDER BY path;
     """
-    engine = create_engine()
+    engine = make_engine()
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     sql_dict = sqlalchemy_json(sqlalchemy_object)
@@ -83,7 +83,7 @@ def login(username, password):
         and 
         password = {password}
     """
-    engine = create_engine()
+    engine = make_engine()
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     user_id = sqlalchemy_object.fetchone()[0]
@@ -120,7 +120,7 @@ def insert_user(username, password):
         {password}
         )
     """
-    engine = create_engine()
+    engine = make_engine()
     con = db_connect(engine)
     con.execute(sql_statement)
     con.close()
@@ -132,7 +132,7 @@ def all_posts():
     from
         posts
     """
-    engine = create_engine()
+    engine = make_engine()
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     posts = sqlalchemy_object.fetchone()[0]

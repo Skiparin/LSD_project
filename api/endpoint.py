@@ -6,17 +6,6 @@ import json
 
 
 app = Flask(__name__)
-
-def db_connect():
-    """
-    Makes connections to the database
-    """
-    engine = create_engine()
-    return engine.connect()
-
-def create_engine():
-    engine = create_engine(URL(**DATABASE_CONNECTION))
-    return engine
     
 @app.route('/post')
 def post():
@@ -39,10 +28,6 @@ def story(request):
     post_title = json['post_title']
     url = json['post_url']
     sql_statement = ss.login(username,password)
-    con = db_connect()
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
     return "story"
 
     #Post on frontpage
@@ -55,29 +40,25 @@ def poll():
 def pollopt():
     return "pollopt"
     #Poll options, just throw away
+
 @app.route('/posts')
 def posts():
-    sql_statement = "select * from posts"
-    con = db_connect()
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
-
+    return ss.all_posts()
+"""
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = "orvur"
         password = "1234"
         sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
-        con = db_connect() 
+        con = db_connect(engine) 
         sqlalchemy_object = con.execute(sql_statement)
         json_list = sqlalchemy_json(sqlalchemy_object)
         con.close()
     else:
         return render_template('login.html')
     return json_list
-
+"""
 @app.route('/create', methods=['POST'])
 def create():
     username = request.form.get('acct')

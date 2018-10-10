@@ -1,5 +1,24 @@
+from sqlalchemy import create_engine
+from sqlalchemy.engine.url import URL
+
+DATABASE_CONNECTION = {
+    'drivername': 'postgres',
+    'port': '5432',
+    'username': 'prod',
+    'database': 'prod',
+}
+"""
+Makes an engine to the database
+"""
+def create_engine():
+    engine = create_engine(URL(**DATABASE_CONNECTION))
+    return engine
+
+def sqlalchemy_json(dictionary):
+    return json.dumps([dict(r) for r in dictionary],default=str)
+
 def comments_from_post(post_id):
-    return f"""
+    sql_statement = f"""
     WITH RECURSIVE cte (id, content, username, path, parent_id, depth, karma)  AS (
     SELECT  
         comments.id,
@@ -46,6 +65,13 @@ def comments_from_post(post_id):
     FROM cte
     ORDER BY path;
     """
+    engine = create_engine()
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    sql_dict = sqlalchemy_json(sqlalchemy_object)
+    con.close()
+    return sql_dict
+
 def login(username, password):
     sql_statement = f"""
     select 
@@ -57,6 +83,7 @@ def login(username, password):
         and 
         password = {password}
     """
+    engine = create_engine()
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     user_id = sqlalchemy_object.fetchone()[0]
@@ -72,6 +99,7 @@ def check_if_username_is_taken(username):
     where 
         username = '{username}'
     """
+    engine = create_engine()
     con = db_connect(engine)
     sqlalchemy_object = con.execute(sql_statement)
     value = sqlalchemy_object.fetchone()[0]
@@ -92,3 +120,22 @@ def insert_user(username, password):
         {password}
         )
     """
+    engine = create_engine()
+    con = db_connect(engine)
+    con.execute(sql_statement)
+    con.close()
+
+def all_posts():
+    sql_statement = f"""
+    select
+        *
+    from
+        posts
+    """
+    engine = create_engine()
+    con = db_connect(engine)
+    sqlalchemy_object = con.execute(sql_statement)
+    posts = sqlalchemy_object.fetchone()[0]
+    con.close()
+    return posts
+

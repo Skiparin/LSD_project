@@ -7,11 +7,17 @@ import json
 
 app = Flask(__name__)
 
-def db_connect(engine):
+def db_connect():
     """
     Makes connections to the database
     """
+    engine = create_engine()
     return engine.connect()
+
+def create_engine():
+    engine = create_engine(URL(**DATABASE_CONNECTION))
+    return engine
+    
 @app.route('/post')
 def post():
     post = requst.form.get('post_type')
@@ -33,7 +39,7 @@ def story(request):
     post_title = json['post_title']
     url = json['post_url']
     sql_statement = ss.login(username,password)
-    con = db_connect(engine)
+    con = db_connect()
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)
     con.close()
@@ -52,7 +58,7 @@ def pollopt():
 @app.route('/posts')
 def posts():
     sql_statement = "select * from posts"
-    con = db_connect(engine)
+    con = db_connect()
     sqlalchemy_object = con.execute(sql_statement)
     json_list = sqlalchemy_json(sqlalchemy_object)
     con.close()
@@ -64,7 +70,7 @@ def login():
         username = "orvur"
         password = "1234"
         sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
-        con = db_connect(engine) 
+        con = db_connect() 
         sqlalchemy_object = con.execute(sql_statement)
         json_list = sqlalchemy_json(sqlalchemy_object)
         con.close()
@@ -87,12 +93,8 @@ def create():
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_statement = ss.comments_from_post(post_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+    sql_dict = ss.comments_from_post(post_id)
+    return json.dumps(sql_dict)
 
 @app.route('/comment')
 def comment():
@@ -102,9 +104,11 @@ def comment():
     #parrent_id = a.get('parrent_id')
     #user_id = a.get('user_id')
     # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    con.close()
+
+    "CONNECTION AND EXCEUTION OF SQL SHOULD BE DONE IN SQL_STATEMENTS"
+    #con = db_connect(engine) 
+    #sqlalchemy_object = con.execute(sql_statement)
+    #con.close()
     return 201
 
 def sqlalchemy_json(dictionary):

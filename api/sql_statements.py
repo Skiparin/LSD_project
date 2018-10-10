@@ -12,7 +12,7 @@ Makes an engine to the database
 """
 def make_engine():
     engine = create_engine(URL(**DATABASE_CONNECTION))
-    return engine
+    return engine.connect()
 
 def sqlalchemy_json(dictionary):
     return json.dumps([dict(r) for r in dictionary],default=str)
@@ -65,8 +65,7 @@ def comments_from_post(post_id):
     FROM cte
     ORDER BY path;
     """
-    engine = make_engine()
-    con = db_connect(engine)
+    con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
     sql_dict = sqlalchemy_json(sqlalchemy_object)
     con.close()
@@ -83,8 +82,7 @@ def login(username, password):
         and 
         password = {password}
     """
-    engine = make_engine()
-    con = db_connect(engine)
+    con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
     user_id = sqlalchemy_object.fetchone()[0]
     con.close()
@@ -99,8 +97,7 @@ def check_if_username_is_taken(username):
     where 
         username = '{username}'
     """
-    engine = create_engine()
-    con = db_connect(engine)
+    con = create_engine()
     sqlalchemy_object = con.execute(sql_statement)
     value = sqlalchemy_object.fetchone()[0]
     con.close()
@@ -120,8 +117,7 @@ def insert_user(username, password):
         {password}
         )
     """
-    engine = make_engine()
-    con = db_connect(engine)
+    con = make_engine()
     con.execute(sql_statement)
     con.close()
 
@@ -132,8 +128,7 @@ def all_posts():
     from
         posts
     """
-    engine = make_engine()
-    con = db_connect(engine)
+    con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
     posts = sqlalchemy_object.fetchone()[0]
     con.close()

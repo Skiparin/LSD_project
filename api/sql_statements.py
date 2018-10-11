@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
+import json
 
 DATABASE_CONNECTION = {
     'drivername': 'postgres',
@@ -130,7 +131,8 @@ def all_posts():
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
-    posts = sqlalchemy_object.fetchone()[0]
+    print(sqlalchemy_object)
+    posts = sqlalchemy_json(sqlalchemy_object)
+    print(posts)
     con.close()
     return posts
-

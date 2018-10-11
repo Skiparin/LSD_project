@@ -140,6 +140,6 @@ def all_posts():
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
-    posts = sqlalchemy_object.fetchone()[0]
+    posts = sqlalchemy_json(sqlalchemy_object)
     con.close()
     return posts

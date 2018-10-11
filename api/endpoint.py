@@ -59,6 +59,7 @@ def login():
         return render_template('login.html')
     return json_list
 """
+
 @app.route('/create', methods=['POST'])
 def create():
     username = request.form.get('acct')

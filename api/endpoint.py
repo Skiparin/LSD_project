@@ -99,7 +99,7 @@ def sqlalchemy_json(dictionary):
 @app.route('/sortedposts')
 def sort_posts():
     jobject = posts()
-    post_list = json.loads(jobject)
+    post_list = sqlalchemy_json(jobject)
     return render_template('frontpage.html', post_list=post_list)
 
 if __name__ == '__main__':

@@ -1,40 +1,23 @@
 from flask import Flask
 from flask import request
-from sqlalchemy import create_engine
-from sqlalchemy.engine.url import URL
+from flask import render_template
 import sql_statements as ss
 import json
 
 
 app = Flask(__name__)
-
-DATABASE_CONNECTION = {
-    'drivername': 'postgres',
-    'port': '5432',
-    'username': 'prod',
-    'database': 'prod',
-}
-"""
-Makes an engine to the database
-"""
-engine = create_engine(URL(**DATABASE_CONNECTION))
-
-def db_connect(engine):
-    """
-    Makes connections to the database
-    """
-    return engine.connect()
-@app.route(/'post')
+    
+@app.route('/post')
 def post():
     post = requst.form.get('post_type')
     answere = ""
-    if(post = "story"):
+    if(post == "story"):
         story(request)
-    elif(post = "comment"):
+    elif(post == "comment"):
         comment()
-    elif(post = "poll"):
+    elif(post == "poll"):
         poll()
-    elif(post = "pollopt"):
+    elif(post == "pollopt"):
         pollopt()
     return answere
 
@@ -66,35 +49,28 @@ def poll():
 def pollopt():
     return "pollopt"
     #Poll options, just throw away
+
 @app.route('/posts')
 def posts():
-    sql_statement = "select * from posts"
-    con = db_connect(engine)
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+    return ss.all_posts()
 
-@app.route('/login')
-def login():
-    username = "orvor"
-    password = "1234"
-    sql_statement = f"select 1 from users where username = '{username}' and passworld = '{password}'"
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+@app.route('/create', methods=['POST'])
+def create():
+    username = request.form.get('acct')
+    password = request.form.get('pw')
+    username_taken = ss.check_if_username_is_taken(username)
+    if not username_taken:
+        ss.insert_user(username, password)
+        return render_template('frontpage.html', username=username)
+    else:
+        return render_template('login.html')
+    return
 
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_statement = ss.comments_from_post(post_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+    sql_dict = ss.comments_from_post(post_id)
+    return json.dumps(sql_dict)
 
 @app.route('/comment')
 def comment():
@@ -104,13 +80,21 @@ def comment():
     #parrent_id = a.get('parrent_id')
     #user_id = a.get('user_id')
     # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    con.close()
+
+    "CONNECTION AND EXCEUTION OF SQL SHOULD BE DONE IN SQL_STATEMENTS"
+    #con = db_connect(engine) 
+    #sqlalchemy_object = con.execute(sql_statement)
+    #con.close()
     return 201
 
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
+@app.route('/sortedposts')
+def sort_posts():
+    jobject = posts()
+    post_list = json.loads(jobject)
+    return render_template('frontpage.html', post_list=post_list)
+
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0")
+    app.run(debug=True,host="0.0.0.0", port=5001)

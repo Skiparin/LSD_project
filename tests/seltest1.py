@@ -13,7 +13,7 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     #Setting up the driver in headless mode
     @classmethod
-    def set_up(cls):
+    def setUpClass(cls):
         options = Options()
         options.add_argument("--headless")
 
@@ -21,12 +21,12 @@ class TestUbuntuHomepage(unittest.TestCase):
         cls.driver.get("http://159.65.116.24:5004/sortedposts")
 
     #This returns us to the start page every time a test finished.
-    def tear_down(self):
+    def tearDown(self):
         self.driver.get("http://159.65.116.24:5004/sortedposts")
 
     #Closing the driver when we are finnished testing.
     @classmethod
-    def tear_down_class(cls):
+    def tearDownClass(cls):
         cls.driver.close()
 
     def test_get_posts(self):
@@ -36,4 +36,4 @@ class TestUbuntuHomepage(unittest.TestCase):
         self.assertEqual(self.result, self.expected)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main()

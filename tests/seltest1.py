@@ -36,8 +36,8 @@ class TestUbuntuHomepage(unittest.TestCase):
         self.expected = '1'
         self.assertEqual(self.result, self.expected)
 
-        self.result = self.driver.find_element_by_name("content")
-        self.assertEqual(self.result, str)
+        self.result = self.driver.find_element_by_name("content").text
+        self.assertTrue(result)
 
 if __name__ == '__main__':
     unittest.main()

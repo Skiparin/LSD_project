@@ -131,9 +131,6 @@ def all_posts():
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
-    print(sqlalchemy_object)
-    print("--------------------------------------------")
     posts = sqlalchemy_json(sqlalchemy_object)
-    print(posts)
     con.close()
     return posts

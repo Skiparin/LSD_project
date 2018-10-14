@@ -31,9 +31,13 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def test_get_posts(self):
         print("test get posts")
+
         self.result = self.driver.find_element_by_xpath("//tr[@class='athing']/td/span").text
         self.expected = '1'
         self.assertEqual(self.result, self.expected)
+
+        self.result = self.driver.find_element_by_name("content")
+        self.assertEqual(self.result, str)
 
 if __name__ == '__main__':
     unittest.main()

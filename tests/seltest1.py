@@ -20,7 +20,7 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     #This returns us to the start page every time a test finished.
     def tear_down(self):
-        self.driver.get("http://159.65.116.24:5001/sortedposts")
+        self.driver.get("http://159.65.116.24:5004/sortedposts")
 
     #Closing the driver when we are finnished testing.
     @classmethod
@@ -29,7 +29,9 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def test_get_posts(self):
         print("test get posts")
-        self.elem = self.driver.find_element_by_name('')
+        self.result = self.driver.find_element_by_xpath('//tbody/tr[1]/td/span').text
+        self.expected = 1
+        self.assertEqual(self.result, self.expected)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

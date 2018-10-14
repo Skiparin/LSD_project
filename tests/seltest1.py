@@ -31,7 +31,7 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def test_get_posts(self):
         print("test get posts")
-        self.result = self.driver.find_element_by_xpath('//tbody/tr[1]/td/span').text
+        self.result = self.driver.find_element_by_xpath('//tbody[2]/tr[1]/td/span').text
         self.expected = 1
         self.assertEqual(self.result, self.expected)
 

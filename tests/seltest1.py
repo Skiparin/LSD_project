@@ -16,7 +16,9 @@ class TestUbuntuHomepage(unittest.TestCase):
     def set_up(self):
         options = Options()
         options.add_argument("--headless")
-        self.browser = webdriver.Firefox(options=options, executable_path="/usr/bin/geckodriver")
+        
+        self.driver = webdriver.Firefox(options=options, executable_path="/usr/bin/geckodriver")
+        self.driver.get("http://159.65.116.24:5004/sortedposts")
 
     #This returns us to the start page every time a test finished.
     def tear_down(self):

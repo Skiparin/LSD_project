@@ -82,7 +82,7 @@ def login(username, password):
     where 
         username = '{username}' 
         and 
-        password = '{password}'
+        password = '{password}' 
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
@@ -112,6 +112,41 @@ def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
     con.execute(text(sql_statement), post_title=post_title, post_content=post_content, is_url=is_url,user_id=user_id,hanesst_id=hanesst_id)
     con.close()
 
+def insert_comment_on_post(post_id,content,user_id,hanesst_id):
+    sql_statement = """
+    INSERT INTO
+        comments(
+                post_id,
+                content,
+                user_id,
+                hanesst_id
+            )
+        values(
+                :post_id,
+                :content,
+                :user_id,
+                :hanesst_id
+            )
+    """
+    con = make_engine()
+    con.execute(text(sql_statement), post_id=post_id,content=content, user_id=user_id,hanesst_id=hanesst_id)
+    con.close()
+def insert_comment_on_comment(post_id,content,parent_id,user_id,hanesst_id):
+    sql_statement = """
+    INSERT INTO
+        comments(
+                post_id,
+                content,
+                user_id,
+                hanesst_id
+            )
+        values(
+                :post_id,
+                :content,
+                :user_id,
+                :hanesst_id
+            )
+    """
 def check_if_username_is_taken(username):
     sql_statement = f"""
     select

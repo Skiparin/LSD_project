@@ -7,7 +7,7 @@ import json
 
 app = Flask(__name__)
     
-@app.route('/post')
+@app.route('/post', methods=['POST'])
 def post():
     post = requst.form.get('post_type')
     answere = ""
@@ -33,7 +33,7 @@ def story(request):
         if post_content == None:
             is_url = False
             post_content = json['post_text']
-        else:
+        else:   
             is_url = True
         ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
     elif user_id == None:

@@ -1,5 +1,10 @@
 import unittest
-from api.endpoint import sort_posts
+import os, sys
+from unittest.mock import patch
+parentPath = os.path.abspath("../api")
+if parentPath not in sys.path:
+    sys.path.insert(0,parentPath)
+from endpoint import sort_posts
 
 class unit_testing(unittest.TestCase):
 

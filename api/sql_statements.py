@@ -97,6 +97,7 @@ def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
     """
     con = db_connect(engine)
     con.execute(sql_statement)
+    con.commit()
     con.close()
 
 def check_if_username_is_taken(username):

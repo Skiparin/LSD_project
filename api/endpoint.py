@@ -14,7 +14,7 @@ def post():
     print(post_type)
     answere = ""
     if(post_type == "story"):
-        story(request)
+        story(json)
     elif(post_type == "comment"):
         comment()
     elif(post_type == "poll"):
@@ -23,8 +23,7 @@ def post():
         pollopt()
     return answere
 
-def story(request):
-    json = request.get_json()
+def create_post(json):
     username = json['username']
     password = json['pwd_hash']
     print(username)

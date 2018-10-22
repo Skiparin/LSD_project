@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
+from sqlalchemy.sql import text
 import json
 
 DATABASE_CONNECTION = {
@@ -89,15 +90,26 @@ def login(username, password):
     con.close()
     return user_id
 
-def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
-    sql_statement = f"""
-    insert into
-        posts(title,content,is_link,user_id,hanesst_id)
-        values {post_title},{post_content},{is_url},{user_id},{hanesst_id}
+ def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
+    sql_statement = """
+    INSERT INTO
+        posts(
+                title,
+                content,
+                is_link,
+                user_id,
+                hanesst_id
+            )
+        values(
+                :post_title, 
+                :post_content, 
+                :is_url, 
+                :user_id, 
+                :hanesst_id
+            )
     """
-    con = db_connect(engine)
-    con.execute(sql_statement)
-    con.commit()
+    con = make_engine()
+    con.execute(text(sql_statement), post_title=post_title, post_content=post_content, is_url=is_url,user_id=user_id,hanesst_id=hanesst_id)
     con.close()
 
 def check_if_username_is_taken(username):

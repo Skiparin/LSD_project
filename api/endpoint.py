@@ -9,7 +9,8 @@ app = Flask(__name__)
     
 @app.route('/post', methods=['POST'])
 def post():
-    post_type = request.form.get('post_type')
+    json = request.get_json()
+    post_type = json['post_type']
     print(post_type)
     answere = ""
     if(post_type == "story"):

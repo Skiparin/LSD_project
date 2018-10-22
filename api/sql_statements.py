@@ -137,16 +137,21 @@ def insert_comment_on_comment(post_id,content,parent_id,user_id,hanesst_id):
         comments(
                 post_id,
                 content,
+                parent_id,
                 user_id,
                 hanesst_id
             )
         values(
                 :post_id,
                 :content,
+                :parent_id,
                 :user_id,
                 :hanesst_id
             )
     """
+    con = make_engine()
+    con.execute(text(sql_statement), post_id=post_id,content=content, parent_id=parent_id,user_id=user_id,hanesst_id=hanesst_id)
+    con.close()
 def check_if_username_is_taken(username):
     sql_statement = f"""
     select

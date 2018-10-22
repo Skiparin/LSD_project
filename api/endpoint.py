@@ -109,11 +109,6 @@ def sort_posts():
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 
-@app.route('/')
-def sort_posts():
-    jobject = ss.all_posts()
-    post_list = json.loads(jobject)
-    return render_template('frontpage.html', post_list=post_list)
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0", port=5002)

@@ -152,6 +152,26 @@ def insert_comment_on_comment(post_id,content,parent_id,user_id,hanesst_id):
     con = make_engine()
     con.execute(text(sql_statement), post_id=post_id,content=content, parent_id=parent_id,user_id=user_id,hanesst_id=hanesst_id)
     con.close()
+def find_comment_with_hanesst_id(hannest_id):
+    sql_statement = """
+        SELECT
+            id,
+            post_id
+        FROM
+            comments
+        WHERE
+            hannest_id = :hannest_id
+        """
+def find_post_with_hanesst_id(hannest_id):
+    sql_statement = """
+        SELECT 
+            id
+        FROM
+            posts
+        WHERE 
+            hannest_id = :hannest_id
+        """
+    pass
 def check_if_username_is_taken(username):
     sql_statement = f"""
     select

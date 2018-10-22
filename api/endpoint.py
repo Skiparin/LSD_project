@@ -60,16 +60,20 @@ def login():
     return json_list
 """
 
-@app.route('/create', methods=['POST'])
+@app.route('/create', methods=['GET', 'POST'])
 def create():
     username = request.form.get('acct')
     password = request.form.get('pw')
-    username_taken = ss.check_if_username_is_taken(username)
-    if not username_taken:
-        ss.insert_user(username, password)
+    if request.method == 'POST':
+        username_taken = ss.check_if_username_is_taken(username)
+        if not username_taken:
+            ss.insert_user(username, password)
+            return render_template('frontpage.html', username=username)
+        else:
+            return render_template('login.html')
+    elif request.method == 'GET':
+        ss.login(username, password)
         return render_template('frontpage.html', username=username)
-    else:
-        return render_template('login.html')
     return
 
 @app.route('/comments')

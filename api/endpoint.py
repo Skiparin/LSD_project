@@ -9,15 +9,16 @@ app = Flask(__name__)
     
 @app.route('/post', methods=['POST'])
 def post():
-    post = request.form.get('post_type')
+    post_type = request.form.get('post_type')
+    print(post_type)
     answere = ""
-    if(post == "story"):
+    if(post_type == "story"):
         story(request)
-    elif(post == "comment"):
+    elif(post_type == "comment"):
         comment()
-    elif(post == "poll"):
+    elif(post_type == "poll"):
         poll()
-    elif(post == "pollopt"):
+    elif(post_type == "pollopt"):
         pollopt()
     return answere
 

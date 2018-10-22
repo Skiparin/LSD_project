@@ -80,9 +80,9 @@ def login(username, password):
     from 
         users 
     where 
-        username = {username} 
+        {username} = username 
         and 
-        password = {password}
+        {password} = password
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)

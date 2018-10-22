@@ -25,7 +25,10 @@ def story(request):
     json = request.get_json()
     username = json['username']
     password = json['pwd_hash']
+    print(username)
+    print(password)
     user_id = ss.login(username,password)
+    print(user_id)
     if user_id != None:
         post_title = json['post_title']
         hanesst_id = json['hanesst_id']
@@ -37,6 +40,7 @@ def story(request):
             is_url = True
         ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
     elif user_id == None:
+        print("Wrong login")
         return "Wrong login"
 
     #Post on frontpage

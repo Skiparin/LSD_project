@@ -90,7 +90,7 @@ def login(username, password):
     con.close()
     return user_id
 
- def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
+def insert_story(post_title, post_content, is_url, user_id, hanesst_id):
     sql_statement = """
     INSERT INTO
         posts(

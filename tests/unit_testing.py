@@ -11,6 +11,7 @@ class unit_testing(unittest.TestCase):
     def test_content_from_post(self):
         expected = "Henrietta er swag"
         post_dict = posts()
+        print(post_dict)
         self.assertTrue(expected in post_dict)
 
 if __name__ == '__main__':

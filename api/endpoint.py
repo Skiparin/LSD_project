@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-import sql_statements as ss
+import sql_statements as sql_statements
 import json
 
 
@@ -43,7 +43,9 @@ def pollopt():
 
 @app.route('/posts')
 def posts():
-    return ss.all_posts()
+    jobject = ss.all_posts()
+    post_list = json.loads(jobject)
+    return post_list
 """
 @app.route('/login', methods=['GET', 'POST'])
 def login():

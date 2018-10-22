@@ -82,22 +82,23 @@ def comment():
     username = json['username']
     password = json['psw_hash']
     user_id = ss.login(username,password)
-    if user_id != None:½
+    if user_id != None:
+        content = json['post_text']
         post_parent = json['post_parent']
         hanesst_id = json['hanesst_id']
         post_id = ss.find_post_with_hanesst_id(post_parent)
         if post_id == None:
             comment_dict = find_comment_with_hanesst_id(parent_id)
             post_id = comment_dict['post_id']
-            content = json['post_text']
             parent_id = comment_dict['id']
             insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
-        elif
-        
+        elif post_id != None:
+            insert_comment_on_post(post_id, content, user_id, hanesst_id)
+        return
 
-    "CONNECTION AND EXCEUTION OF SQL SHOULD BE DONE IN SQL_STATEMENTS"
 
-    return 201
+
+
 
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)

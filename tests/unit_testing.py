@@ -12,7 +12,7 @@ class unit_testing(unittest.TestCase):
         expected = "Henrietta er swag"
         post_dict = posts()
         print(post_dict)
-        self.assertTrue(expected in post_dict)
+        self.assertEquals(expected, post_dict[0]["content"])
 
 if __name__ == '__main__':
     unittest.main()

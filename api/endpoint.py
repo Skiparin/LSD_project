@@ -79,17 +79,24 @@ def comments():
 
 @app.route('/comment')
 def comment():
-    #a = request.get.body()
-    #comment = a.get('comment')
-    #post_id = a.get('post_id')
-    #parrent_id = a.get('parrent_id')
-    #user_id = a.get('user_id')
-    # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
+    username = json['username']
+    password = json['psw_hash']
+    user_id = ss.login(username,password)
+    if user_id != None:½
+        post_parent = json['post_parent']
+        hanesst_id = json['hanesst_id']
+        post_id = ss.find_post_with_hanesst_id(post_parent)
+        if post_id == None:
+            comment_dict = find_comment_with_hanesst_id(parent_id)
+            post_id = comment_dict['post_id']
+            content = json['post_text']
+            parent_id = comment_dict['id']
+            insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+        elif
+        
 
     "CONNECTION AND EXCEUTION OF SQL SHOULD BE DONE IN SQL_STATEMENTS"
-    #con = db_connect(engine) 
-    #sqlalchemy_object = con.execute(sql_statement)
-    #con.close()
+
     return 201
 
 def sqlalchemy_json(dictionary):
@@ -101,5 +108,11 @@ def sort_posts():
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 
+@app.route('/')
+def sort_posts():
+    jobject = ss.all_posts()
+    post_list = json.loads(jobject)
+    return render_template('frontpage.html', post_list=post_list)
+
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0", port=5001)
+    app.run(debug=True,host="0.0.0.0", port=5002)

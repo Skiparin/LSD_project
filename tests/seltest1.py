@@ -13,7 +13,7 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def testTitle(self):
         self.browser.get('http://www.ubuntu.com/')
-        self.assertIn('Uburesjtrsjtrsjtrsntu', self.browser.title)
+        self.assertIn('Ubuntu', self.browser.title)
 
     def tearDown(self):
         self.browser.quit()

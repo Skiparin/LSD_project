@@ -9,7 +9,7 @@ app = Flask(__name__)
     
 @app.route('/post', methods=['POST'])
 def post():
-    post = requst.form.get('post_type')
+    post = request.form.get('post_type')
     answere = ""
     if(post == "story"):
         story(request)

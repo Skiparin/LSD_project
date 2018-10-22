@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/prod/LSD_project/venv/bin/python3
 
 import unittest
 from selenium import webdriver
@@ -13,7 +13,7 @@ class TestUbuntuHomepage(unittest.TestCase):
 
     def testTitle(self):
         self.browser.get('http://www.ubuntu.com/')
-        self.assertIn('Ubuntu', self.browser.title)
+        self.assertIn('Uburesjtrsjtrsjtrsntu', self.browser.title)
 
     def tearDown(self):
         self.browser.quit()

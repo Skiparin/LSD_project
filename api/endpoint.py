@@ -29,7 +29,7 @@ def create_post(json_string):
     #print(username)
     #print(password)
     #user_id = ss.login(username,password)
-    print(user_id)
+    #print(user_id)
     if True:
         post_title = json_string['post_title']
         hanesst_id = json_string['hanesst_id']
@@ -39,7 +39,7 @@ def create_post(json_string):
             post_content = json_string['post_text']
         else:   
             is_url = True
-        ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+        ss.insert_story(post_title,post_content,is_url,4,hanesst_id)
     elif user_id == None:
         print("Wrong login")
         return "Wrong login"
@@ -91,9 +91,9 @@ def comment(json_string):
             comment_dict = ss.find_comment_with_hanesst_id(post_parent)
             post_id = comment_dict['post_id']
             parent_id = comment_dict['id']
-            ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+            ss.insert_comment_on_comment(post_id, content, parent_id, 4, hanesst_id)
         elif post_id != None:
-            ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+            ss.insert_comment_on_post(post_id, content, 4, hanesst_id)
         return
 
 

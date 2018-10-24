@@ -16,7 +16,7 @@ def post():
     if(post_type == "story"):
         story(json)
     elif(post_type == "comment"):
-        comment()
+        comment(json)
     elif(post_type == "poll"):
         poll()
     elif(post_type == "pollopt"):
@@ -78,9 +78,9 @@ def comments():
     return json.dumps(sql_dict)
 
 @app.route('/comment')
-def comment():
+def comment(json):
     username = json['username']
-    password = json['psw_hash']
+    password = json['pwd_hash']
     user_id = ss.login(username,password)
     if user_id != None:
         content = json['post_text']

@@ -28,7 +28,7 @@ def status():
     ip = 'http://159.65.116.24'
     try:
         status_code = requests.get(ip, timeout=30).status_code
-        return status_code
+        return 'server is running'
     except requests.ConnectionError:
         return 'server is not running'
 

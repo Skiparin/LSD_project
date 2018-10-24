@@ -88,15 +88,13 @@ def comment(json):
         hanesst_id = json['hanesst_id']
         post_id = ss.find_post_with_hanesst_id(post_parent)
         if post_id == None:
-            comment_dict = find_comment_with_hanesst_id(parent_id)
+            comment_dict = ss.find_comment_with_hanesst_id(parent_id)
             post_id = comment_dict['post_id']
             parent_id = comment_dict['id']
             insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
         elif post_id != None:
             insert_comment_on_post(post_id, content, user_id, hanesst_id)
         return
-
-
 
 
 

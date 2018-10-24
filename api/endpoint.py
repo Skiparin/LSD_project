@@ -24,13 +24,13 @@ def post():
     return answere
 
 def create_post(json_string):
-    username = json_string['username']
-    password = json_string['pwd_hash']
-    print(username)
-    print(password)
-    user_id = ss.login(username,password)
+    #username = json_string['username']
+    #password = json_string['pwd_hash']
+    #print(username)
+    #print(password)
+    #user_id = ss.login(username,password)
     print(user_id)
-    if user_id != None:
+    if True:
         post_title = json_string['post_title']
         hanesst_id = json_string['hanesst_id']
         post_content = json_string['post_url']
@@ -79,10 +79,10 @@ def comments():
 
 @app.route('/comment')
 def comment(json_string):
-    username = json_string['username']
-    password = json_string['pwd_hash']
-    user_id = ss.login(username,password)
-    if user_id != None:
+    #username = json_string['username']
+    #password = json_string['pwd_hash']
+    #user_id = ss.login(username,password)
+    if True:
         content = json_string['post_text']
         post_parent = json_string['post_parent']
         hanesst_id = json_string['hanesst_id']

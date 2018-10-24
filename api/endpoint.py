@@ -21,6 +21,16 @@ def post():
         pollopt()
     return answere
 
+@app.route('/status')
+def status():
+    """ This function returns the status code of the url."""
+    ip = '159.65.116.24'
+    try:
+        status_code = requests.get(url, timeout=30).status_code
+        return status_code
+    except requests.ConnectionError:
+        return 'server is not running'
+
 def story(request):
     json = request.get_json()
     username = json['username']

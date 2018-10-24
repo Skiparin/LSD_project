@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from flask_cache import status
 import sql_statements as sql_statements
 import json
 import requests
@@ -14,7 +13,7 @@ def post():
     post = requst.form.get('post_type')
     answere = ""
     if(post == "story"):
-        story(request)
+        story(request)  
     elif(post == "comment"):
         comment()
     elif(post == "poll"):
@@ -26,12 +25,12 @@ def post():
 @app.route('/status')
 def status():
     """ This function returns the status code of the ip."""
-    ip = 'http://159.65.116.24'
+    ip = 'http://159.65.116.24/posts'
     try:
         status_code = requests.get(ip, timeout=30).status_code
-        return status.HTTP_200_OK
+        return render_template('status.html', status_code=status_code)
     except requests.ConnectionError:
-        return status.HTTP_404_NOT_FOUND
+        return 'server not running'
 
 def story(request):
     json = request.get_json()

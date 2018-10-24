@@ -3,6 +3,7 @@ from flask import request
 from flask import render_template
 import sql_statements as sql_statements
 import json
+import requests
 
 
 app = Flask(__name__)

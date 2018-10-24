@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from flask.ext.api import status
+from flask_cache import status
 import sql_statements as sql_statements
 import json
 import requests

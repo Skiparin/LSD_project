@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.sql import text
+from sqlalchemy.pool import Pool, NullPool
 import json
 
 DATABASE_CONNECTION = {
@@ -13,7 +14,7 @@ DATABASE_CONNECTION = {
 Makes an engine to the database
 """
 def make_engine():
-    engine = create_engine(URL(**DATABASE_CONNECTION))
+    engine = create_engine(URL(**DATABASE_CONNECTION), poolclass=NullPool)
     return engine.connect()
 
 def sqlalchemy_json(dictionary):

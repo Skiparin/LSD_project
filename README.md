@@ -26,11 +26,11 @@
 - The application should be operating atleast 95% of the time.
 - While the application is under maintenance, there should be a mechanism buffering incoming content.
 
-### **Info for takovers**
+### **Info for the operators**
 IP is 159.65.116.24
 
 Api's to call:
 
-/status - gets the current status code of the server.
+IP/status - gets the current status code of the server.
 
-/posts - gets all posts unsorted.
+IP/posts - gets all posts unsorted.

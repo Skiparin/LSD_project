@@ -9,34 +9,34 @@ app = Flask(__name__)
     
 @app.route('/post', methods=['POST'])
 def post():
-    json = request.get_json()
-    post_type = json['post_type']
+    json_string = request.get_json()
+    post_type = json_string['post_type']
     print(post_type)
     answere = ""
     if(post_type == "story"):
-        create_post(json)
+        create_post(json_string)
     elif(post_type == "comment"):
-        comment(json)
+        comment(json_string)
     elif(post_type == "poll"):
         poll()
     elif(post_type == "pollopt"):
         pollopt()
     return answere
 
-def create_post(json):
-    username = json['username']
-    password = json['pwd_hash']
+def create_post(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
     print(username)
     print(password)
     user_id = ss.login(username,password)
     print(user_id)
     if user_id != None:
-        post_title = json['post_title']
-        hanesst_id = json['hanesst_id']
-        post_content = json['post_url']
+        post_title = json_string['post_title']
+        hanesst_id = json_string['hanesst_id']
+        post_content = json_string['post_url']
         if post_content == None:
             is_url = False
-            post_content = json['post_text']
+            post_content = json_string['post_text']
         else:   
             is_url = True
         ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
@@ -78,14 +78,14 @@ def comments():
     return json.dumps(sql_dict)
 
 @app.route('/comment')
-def comment(json):
-    username = json['username']
-    password = json['pwd_hash']
+def comment(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
     user_id = ss.login(username,password)
     if user_id != None:
-        content = json['post_text']
-        post_parent = json['post_parent']
-        hanesst_id = json['hanesst_id']
+        content = json_string['post_text']
+        post_parent = json_string['post_parent']
+        hanesst_id = json_string['hanesst_id']
         post_id = ss.find_post_with_hanesst_id(post_parent)
         if post_id == None:
             comment_dict = ss.find_comment_with_hanesst_id(post_parent)

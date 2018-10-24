@@ -25,7 +25,7 @@ def post():
 @app.route('/status')
 def status():
     """ This function returns the status code of the ip."""
-    ip = '159.65.116.24'
+    ip = 'http://159.65.116.24'
     try:
         status_code = requests.get(ip, timeout=30).status_code
         return status_code

@@ -165,7 +165,13 @@ def find_comment_with_hanesst_id(hanesst_id):
         """
     con = make_engine()
     sqlalchemy_object = con.execute(text(sql_statement),hanesst_id=hanesst_id)
-    value = sqlalchemy_object.fetchone()[0]
+    value = None
+    for sql_tuple in sqlalchemy_object:
+        value = {}
+        for x,y in sql_tuple.items():
+            value[x] = y
+            print(str(value))
+    return value
     con.close()
 def find_post_with_hanesst_id(hanesst_id):
     sql_statement = """
@@ -178,10 +184,9 @@ def find_post_with_hanesst_id(hanesst_id):
         """
     con = make_engine()
     sqlalchemy_object = con.execute(text(sql_statement),hanesst_id=hanesst_id)
-    if sqlalchemy_object:
-        value = sqlalchemy_object.fetchone()[0]
-    else:
-        value = None
+    value = None
+    for sql_tuple in sqlalchemy_object:
+        value = sql_tuple[0]
     con.close()
     return value
 def check_if_username_is_taken(username):
@@ -194,7 +199,7 @@ def check_if_username_is_taken(username):
         username = '{username}'
     """
     con = create_engine()
-    sqlalchemy_object = con.execute(sql_statement)
+    sqlalchetmy_object = con.execute(sql_statement)
     value = sqlalchemy_object.fetchone()[0]
     con.close()
     return value
@@ -218,7 +223,7 @@ def insert_user(username, password):
     con.close()
 
 def all_posts():
-    sql_statement = f"""
+    sql_stateument = f"""
     select
         *
     from

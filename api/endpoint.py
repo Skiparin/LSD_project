@@ -14,7 +14,7 @@ def post():
     print(post_type)
     answere = ""
     if(post_type == "story"):
-        story(json)
+        create_story(json)
     elif(post_type == "comment"):
         comment(json)
     elif(post_type == "poll"):

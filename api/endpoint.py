@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from flask.ext.api import status
 import sql_statements as sql_statements
 import json
 import requests
@@ -28,9 +29,9 @@ def status():
     ip = 'http://159.65.116.24'
     try:
         status_code = requests.get(ip, timeout=30).status_code
-        return 'server is running'
+        return status.HTTP_200_OK
     except requests.ConnectionError:
-        return 'server is not running'
+        return status.HTTP_404_NOT_FOUND
 
 def story(request):
     json = request.get_json()

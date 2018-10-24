@@ -178,7 +178,10 @@ def find_post_with_hanesst_id(hanesst_id):
         """
     con = make_engine()
     sqlalchemy_object = con.execute(text(sql_statement),hanesst_id=hanesst_id)
-    value = sqlalchemy_object.fetchone()[0]
+    if sqlalchemy_object:
+        value = sqlalchemy_object.fetchone()[0]
+    else:
+        value = None
     con.close()
     return value
 def check_if_username_is_taken(username):

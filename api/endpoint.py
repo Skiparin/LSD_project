@@ -24,10 +24,10 @@ def post():
 
 @app.route('/status')
 def status():
-    """ This function returns the status code of the url."""
+    """ This function returns the status code of the ip."""
     ip = '159.65.116.24'
     try:
-        status_code = requests.get(url, timeout=30).status_code
+        status_code = requests.get(ip, timeout=30).status_code
         return status_code
     except requests.ConnectionError:
         return 'server is not running'

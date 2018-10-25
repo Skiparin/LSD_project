@@ -25,3 +25,12 @@
 ### **Non-functional requirements**
 - The application should be operating atleast 95% of the time.
 - While the application is under maintenance, there should be a mechanism buffering incoming content.
+
+### **Info for the operators**
+IP is 159.65.116.24
+
+Api's to call:
+
+IP/status - gets the current status code of the server.
+
+IP/posts - gets all posts unsorted.

@@ -30,7 +30,7 @@ def status():
         status_code = requests.get(ip, timeout=30).status_code
         return render_template('status.html', status_code=status_code)
     except requests.ConnectionError:
-        return 'server not running'
+        return render_template('status.html', status_code=status_code) #here you should log the exception.
 
 def story(request):
     json = request.get_json()

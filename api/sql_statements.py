@@ -3,6 +3,7 @@ from sqlalchemy.engine.url import URL
 from sqlalchemy.sql import text
 from sqlalchemy.pool import Pool, NullPool
 import json
+import logging
 
 DATABASE_CONNECTION = {
     'drivername': 'postgres',
@@ -150,9 +151,13 @@ def insert_comment_on_comment(post_id,content,parent_id,user_id,hanesst_id):
                 :hanesst_id
             )
     """
-    con = make_engine()
-    con.execute(text(sql_statement), post_id=post_id,content=content, parent_id=parent_id,user_id=user_id,hanesst_id=hanesst_id)
-    con.close()
+    try:
+        con = make_engine()
+        con.execute(text(sql_statement), post_id=post_id,content=content, parent_id=parent_id,user_id=user_id,hanesst_id=hanesst_id)
+        con.close()
+    except Exception as e:
+        raise e
+    
 def find_comment_with_hanesst_id(hanesst_id):
     sql_statement = """
         SELECT

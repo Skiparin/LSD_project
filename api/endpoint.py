@@ -39,7 +39,7 @@ def create_post(json_string):
             is_url = True
         logging.info("Test info")
         logging.debug("Test Debuf")
-        logging.info("Request for creating post: title: %s content:%s url:%s user:%s hanesst:%s"post_title,post_content,is_url,user_id,hanesst_id)
+        logging.info("Request for creating post: title: %s content:%s url:%s user:%s hanesst:%s",post_title,post_content,is_url,user_id,hanesst_id)
         try:
             ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
         except Exception as e:

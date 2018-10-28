@@ -37,6 +37,8 @@ def create_post(json_string):
             post_content = json_string['post_text']
         else:   
             is_url = True
+        logging.info("Test info")
+        logging.debuf("Test Debuf")
         logging.info(str(post_title),str(post_content),str(is_url),str(user_id),str(hanesst_id))
         try:
             ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)

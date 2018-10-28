@@ -3,6 +3,7 @@ from flask import request
 from flask import render_template
 import sql_statements as ss
 import json
+import logging
 
 
 app = Flask(__name__)
@@ -36,7 +37,15 @@ def create_post(json_string):
             post_content = json_string['post_text']
         else:   
             is_url = True
-        ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+        logging.info("Test info")
+        logging.debug("Test Debuf")
+        logging.info("Request for creating post: title: %s content: %s url: %s user: %s hanesst: %s",post_title,post_content,is_url,user_id,hanesst_id)
+        try:
+            ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+        except Exception as e:
+            logging.warning(e)
+        
+        
     elif user_id == None:
         print("Wrong login")
         return "Wrong login"
@@ -88,9 +97,19 @@ def comment(json_string):
             comment_dict = ss.find_comment_with_hanesst_id(post_parent)
             post_id = comment_dict['post_id']
             parent_id = comment_dict['id']
-            ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+            logging.info("Comment on another comment: postid: %s content: %s parentid: %s userid: %s hanesstid: %s",post_id, content, parent_id, user_id, hanesst_id)
+            try:
+                ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+            except Exception as e:
+                logging.warning(e)
+            
         elif post_id:
-            ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+            logging.info("comment on post: postid: %s content: %s userid: %s hanesstid: %s",post_id, content, user_id, hanesst_id)
+            try:
+                ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+            except Exception as e:
+                logging.warning(e)
+            
         return
 
 
@@ -106,4 +125,5 @@ def sort_posts():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
     app.run(debug=True,host="0.0.0.0", port=5001)

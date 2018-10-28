@@ -39,7 +39,7 @@ def create_post(json_string):
             is_url = True
         logging.info("Test info")
         logging.debug("Test Debuf")
-        logging.info("Request for creating post: title: %s content:%s url:%s user:%s hanesst:%s",post_title,post_content,is_url,user_id,hanesst_id)
+        logging.info("Request for creating post: title: %s content: %s url: %s user: %s hanesst: %s",post_title,post_content,is_url,user_id,hanesst_id)
         try:
             ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
         except Exception as e:
@@ -97,14 +97,14 @@ def comment(json_string):
             comment_dict = ss.find_comment_with_hanesst_id(post_parent)
             post_id = comment_dict['post_id']
             parent_id = comment_dict['id']
-            logging.info(post_id, content, parent_id, user_id, hanesst_id)
+            logging.info("Comment on another comment: postid: %s content: %s parentid: %s userid: %s hanesstid: %s",post_id, content, parent_id, user_id, hanesst_id)
             try:
                 ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
             except Exception as e:
                 logging.warning(e)
             
         elif post_id:
-            logging.info(post_id, content, user_id, hanesst_id)
+            logging.info("comment on post: postid: %s content: %s userid: %s hanesstid: %s",post_id, content, user_id, hanesst_id)
             try:
                 ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
             except Exception as e:

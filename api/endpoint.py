@@ -4,21 +4,25 @@ from flask import render_template
 import sql_statements as sql_statements
 import json
 import requests
+import logging
 
 
 app = Flask(__name__)
     
-@app.route('/post')
+@app.route('/post', methods=['POST'])
 def post():
-    post = requst.form.get('post_type')
+    json_string = request.get_json()
+    post_type = json_string['post_type']
+    print(post_type)
     answere = ""
-    if(post == "story"):
-        story(request)  
-    elif(post == "comment"):
-        comment()
-    elif(post == "poll"):
+    
+    if(post_type == "story"):
+        create_post(json_string)
+    elif(post_type == "comment"):
+        comment(json_string)
+    elif(post_type == "poll"):
         poll()
-    elif(post == "pollopt"):
+    elif(post_type == "pollopt"):
         pollopt()
     return answere
 
@@ -32,14 +36,31 @@ def status():
     except requests.ConnectionError:
         return 'server not running'
 
-def story(request):
-    json = request.get_json()
-    username = json['username']
-    password = json['pwd_hash']
-    post_title = json['post_title']
-    url = json['post_url']
-    sql_statement = ss.login(username,password)
-    return "story"
+def create_post(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
+    user_id = ss.login(username,password)
+    if True:
+        post_title = json_string['post_title']
+        hanesst_id = json_string['hanesst_id']
+        post_content = json_string['post_url']
+        if post_content == None:
+            is_url = False
+            post_content = json_string['post_text']
+        else:   
+            is_url = True
+        logging.info("Test info")
+        logging.debug("Test Debuf")
+        logging.info("Request for creating post: title: %s content: %s url: %s user: %s hanesst: %s",post_title,post_content,is_url,user_id,hanesst_id)
+        try:
+            ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+        except Exception as e:
+            logging.warning(e)
+        
+        
+    elif user_id == None:
+        print("Wrong login")
+        return "Wrong login"
 
     #Post on frontpage
 def comment():
@@ -96,19 +117,35 @@ def comments():
     return json.dumps(sql_dict)
 
 @app.route('/comment')
-def comment():
-    #a = request.get.body()
-    #comment = a.get('comment')
-    #post_id = a.get('post_id')
-    #parrent_id = a.get('parrent_id')
-    #user_id = a.get('user_id')
-    # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
+def comment(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
+    user_id = ss.login(username,password)
+    if True:
+        content = json_string['post_text']
+        post_parent = json_string['post_parent']
+        hanesst_id = json_string['hanesst_id']
+        post_id = ss.find_post_with_hanesst_id(post_parent)
+        if not post_id:
+            comment_dict = ss.find_comment_with_hanesst_id(post_parent)
+            post_id = comment_dict['post_id']
+            parent_id = comment_dict['id']
+            logging.info("Comment on another comment: postid: %s content: %s parentid: %s userid: %s hanesstid: %s",post_id, content, parent_id, user_id, hanesst_id)
+            try:
+                ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+            except Exception as e:
+                logging.warning(e)
+            
+        elif post_id:
+            logging.info("comment on post: postid: %s content: %s userid: %s hanesstid: %s",post_id, content, user_id, hanesst_id)
+            try:
+                ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+            except Exception as e:
+                logging.warning(e)
+            
+        return
 
-    "CONNECTION AND EXCEUTION OF SQL SHOULD BE DONE IN SQL_STATEMENTS"
-    #con = db_connect(engine) 
-    #sqlalchemy_object = con.execute(sql_statement)
-    #con.close()
-    return 201
+
 
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
@@ -119,5 +156,7 @@ def sort_posts():
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 
+
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0", port=5004)
+    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
+    app.run(debug=True,host="0.0.0.0", port=5001)

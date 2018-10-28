@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/prod/LSD_project/venv/bin/python3
 
 import unittest
 from selenium import webdriver

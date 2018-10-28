@@ -1,75 +1,109 @@
 from flask import Flask
 from flask import request
-from sqlalchemy import create_engine
-from sqlalchemy.engine.url import URL
+from flask import render_template
 import sql_statements as ss
 import json
 
 
 app = Flask(__name__)
+    
+@app.route('/post', methods=['POST'])
+def post():
+    json_string = request.get_json()
+    post_type = json_string['post_type']
+    print(post_type)
+    answere = ""
+    if(post_type == "story"):
+        create_post(json_string)
+    elif(post_type == "comment"):
+        comment(json_string)
+    elif(post_type == "poll"):
+        poll()
+    elif(post_type == "pollopt"):
+        pollopt()
+    return answere
 
-DATABASE_CONNECTION = {
-    'drivername': 'postgres',
-    'port': '5432',
-    'username': 'prod',
-    'database': 'prod',
-}
-"""
-Makes an engine to the database
-"""
-engine = create_engine(URL(**DATABASE_CONNECTION))
+def create_post(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
+    user_id = ss.login(username,password)
+    if True:
+        post_title = json_string['post_title']
+        hanesst_id = json_string['hanesst_id']
+        post_content = json_string['post_url']
+        if post_content == None:
+            is_url = False
+            post_content = json_string['post_text']
+        else:   
+            is_url = True
+        ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+    elif user_id == None:
+        print("Wrong login")
+        return "Wrong login"
 
-def db_connect(engine):
-    """
-    Makes connections to the database
-    """
-    return engine.connect()
+    #Post on frontpage
+def comment():
+    return "comment"
+    #Post a comment
+def poll():
+    return "poll"
+    #Poll, just throw away
+def pollopt():
+    return "pollopt"
+    #Poll options, just throw away
 
 @app.route('/posts')
 def posts():
-    sql_statement = "select * from posts"
-    con = db_connect(engine)
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+    return ss.all_posts()
 
-@app.route('/login')
-def login():
-    username = "orvur"
-    password = "1234"
-    sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+@app.route('/create', methods=['POST'])
+def create():
+    username = request.form.get('acct')
+    password = request.form.get('pw')
+    username_taken = ss.check_if_username_is_taken(username)
+    if not username_taken:
+        ss.insert_user(username, password)
+        return render_template('frontpage.html', username=username)
+    else:
+        return render_template('login.html')
+    return
 
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_statement = ss.comments_from_post(post_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    json_list = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return json_list
+    sql_dict = ss.comments_from_post(post_id)
+    return json.dumps(sql_dict)
 
 @app.route('/comment')
-def comment():
-    #a = request.get.body()
-    #comment = a.get('comment')
-    #post_id = a.get('post_id')
-    #parrent_id = a.get('parrent_id')
-    #user_id = a.get('user_id')
-    # sql_statement = ss.commment_on_post(comment,post_id,parrent_id,user_id)
-    con = db_connect(engine) 
-    sqlalchemy_object = con.execute(sql_statement)
-    con.close()
-    return 201
+def comment(json_string):
+    username = json_string['username']
+    password = json_string['pwd_hash']
+    user_id = ss.login(username,password)
+    if True:
+        content = json_string['post_text']
+        post_parent = json_string['post_parent']
+        hanesst_id = json_string['hanesst_id']
+        post_id = ss.find_post_with_hanesst_id(post_parent)
+        if not post_id:
+            comment_dict = ss.find_comment_with_hanesst_id(post_parent)
+            post_id = comment_dict['post_id']
+            parent_id = comment_dict['id']
+            ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+        elif post_id:
+            ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+        return
+
+
 
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
+@app.route('/sortedposts')
+def sort_posts():
+    jobject = ss.all_posts()
+    post_list = json.loads(jobject)
+    return render_template('frontpage.html', post_list=post_list)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(debug=True,host="0.0.0.0", port=5001)

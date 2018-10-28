@@ -1,8 +1,9 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-import sql_statements as ss
+import sql_statements as sql_statements
 import json
+import requests
 import logging
 
 
@@ -14,6 +15,7 @@ def post():
     post_type = json_string['post_type']
     print(post_type)
     answere = ""
+    
     if(post_type == "story"):
         create_post(json_string)
     elif(post_type == "comment"):
@@ -23,6 +25,16 @@ def post():
     elif(post_type == "pollopt"):
         pollopt()
     return answere
+
+@app.route('/status')
+def status():
+    """ This function returns the status code of the ip."""
+    ip = 'http://159.65.116.24/posts'
+    try:
+        status_code = requests.get(ip, timeout=30).status_code
+        return render_template('status.html', status_code=status_code)
+    except requests.ConnectionError:
+        return 'server not running'
 
 def create_post(json_string):
     username = json_string['username']
@@ -63,24 +75,45 @@ def pollopt():
 
 @app.route('/posts')
 def posts():
-    return ss.all_posts()
+    jobject = sql_statements.all_posts()
+    post_list = json.loads(jobject)
+    return post_list
+"""
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = "orvur"
+        password = "1234"
+        sql_statement = f"select 1 from users where username = '{username}' and password = '{password}'"
+        con = db_connect(engine) 
+        sqlalchemy_object = con.execute(sql_statement)
+        json_list = sqlalchemy_json(sqlalchemy_object)
+        con.close()
+    else:
+        return render_template('login.html')
+    return json_list
+"""
 
-@app.route('/create', methods=['POST'])
+@app.route('/create', methods=['GET', 'POST'])
 def create():
     username = request.form.get('acct')
     password = request.form.get('pw')
-    username_taken = ss.check_if_username_is_taken(username)
-    if not username_taken:
-        ss.insert_user(username, password)
+    if request.method == 'POST':
+        username_taken = sql_statements.check_if_username_is_taken(username)
+        if not username_taken:
+            sql_statements.insert_user(username, password)
+            return render_template('frontpage.html', username=username)
+        else:
+            return render_template('login.html')
+    elif request.method == 'GET':
+        sql_statements.login(username, password)
         return render_template('frontpage.html', username=username)
-    else:
-        return render_template('login.html')
     return
 
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_dict = ss.comments_from_post(post_id)
+    sql_dict = sql_statements.comments_from_post(post_id)
     return json.dumps(sql_dict)
 
 @app.route('/comment')
@@ -119,7 +152,7 @@ def sqlalchemy_json(dictionary):
 
 @app.route('/sortedposts')
 def sort_posts():
-    jobject = ss.all_posts()
+    jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 

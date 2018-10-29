@@ -28,10 +28,15 @@
 
 ### **Info for the operators**
 You can write to any the following emails if you have any questions:
+
 og1806x9@hotmail.com
+
 2750daugbjerg@gmail.com
+
 n_r_mikkelsen@hotmail.com
+
 tass2012@gmail.com
+
 tvh_1994@hotmail.dk
 
 Sign up for the server:

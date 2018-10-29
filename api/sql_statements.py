@@ -222,6 +222,27 @@ def insert_user(username, password):
     con.execute(sql_statement)
     con.close()
 
+def get_lastest_hanesst_id():
+    sql_stateument = f"""
+    SELECT
+        case 
+            when max(p.hanesst_id) > max(c.hanesst_id) 
+            THEN max(p.hanesst_id) 
+        ELSE max(c.hanesst_id) 
+        end 
+    from 
+        posts p 
+        full outer join comments c
+        on 
+            p.hanesst_id = c.hanesst_id;
+
+    """
+    con = make_engine()
+    sqlalchemy_object = con.execute(sql_statement)
+    last_hanesst_id = sqlalchemy_object.fetchone()[0]
+    con.close()
+    return last_hanesst_id
+
 def all_posts():
     sql_stateument = f"""
     select

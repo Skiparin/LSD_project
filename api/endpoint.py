@@ -7,6 +7,9 @@ import logging
 
 
 app = Flask(__name__)
+
+@app.route('/latest')
+    return ss.get_lastest_hanesst_id()
     
 @app.route('/post', methods=['POST'])
 def post():

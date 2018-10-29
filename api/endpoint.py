@@ -8,6 +8,9 @@ import logging
 
 
 app = Flask(__name__)
+
+@app.route('/latest')
+    return sql_statements.get_lastest_hanesst_id()
     
 @app.route('/post', methods=['POST'])
 def post():
@@ -39,7 +42,7 @@ def status():
 def create_post(json_string):
     username = json_string['username']
     password = json_string['pwd_hash']
-    user_id = ss.login(username,password)
+    user_id = sql_statements.login(username,password)
     if True:
         post_title = json_string['post_title']
         hanesst_id = json_string['hanesst_id']
@@ -53,7 +56,7 @@ def create_post(json_string):
         logging.debug("Test Debuf")
         logging.info("Request for creating post: title: %s content: %s url: %s user: %s hanesst: %s",post_title,post_content,is_url,user_id,hanesst_id)
         try:
-            ss.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
+            sql_statements.insert_story(post_title,post_content,is_url,user_id,hanesst_id)
         except Exception as e:
             logging.warning(e)
         
@@ -120,26 +123,26 @@ def comments():
 def comment(json_string):
     username = json_string['username']
     password = json_string['pwd_hash']
-    user_id = ss.login(username,password)
+    user_id = sql_statements.login(username,password)
     if True:
         content = json_string['post_text']
         post_parent = json_string['post_parent']
         hanesst_id = json_string['hanesst_id']
-        post_id = ss.find_post_with_hanesst_id(post_parent)
+        post_id = sql_statements.find_post_with_hanesst_id(post_parent)
         if not post_id:
-            comment_dict = ss.find_comment_with_hanesst_id(post_parent)
+            comment_dict = sql_statements.find_comment_with_hanesst_id(post_parent)
             post_id = comment_dict['post_id']
             parent_id = comment_dict['id']
             logging.info("Comment on another comment: postid: %s content: %s parentid: %s userid: %s hanesstid: %s",post_id, content, parent_id, user_id, hanesst_id)
             try:
-                ss.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
+                sql_statements.insert_comment_on_comment(post_id, content, parent_id, user_id, hanesst_id)
             except Exception as e:
                 logging.warning(e)
             
         elif post_id:
             logging.info("comment on post: postid: %s content: %s userid: %s hanesstid: %s",post_id, content, user_id, hanesst_id)
             try:
-                ss.insert_comment_on_post(post_id, content, user_id, hanesst_id)
+                sql_statements.insert_comment_on_post(post_id, content, user_id, hanesst_id)
             except Exception as e:
                 logging.warning(e)
             

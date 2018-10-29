@@ -27,7 +27,7 @@ class TestUbuntuHomepage(unittest.TestCase):
     #Closing the driver when we are finnished testing.
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
+        cls.driver.quit()
 
     def test_get_posts(self):
         print("test get posts")

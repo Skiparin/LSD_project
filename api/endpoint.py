@@ -10,6 +10,7 @@ import logging
 app = Flask(__name__)
 
 @app.route('/latest')
+def latest():
     return sql_statements.get_lastest_hanesst_id()
     
 @app.route('/post', methods=['POST'])
@@ -153,7 +154,7 @@ def sqlalchemy_json(dictionary):
 
 @app.route('/home')
 def sort_posts():
-    jobject = sql_statementsx.all_posts()
+    jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 

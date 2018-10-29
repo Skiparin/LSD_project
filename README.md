@@ -49,12 +49,10 @@ How to access log files:
  - now you are on the server go to LSD_project/api
  - here you can see our logfile.log
  
-IP is 159.65.116.24
-
 Api's to call:
 
-IP/status - gets the current status code of the server.
+http://159.65.116.24/sortedposts
 
-IP/posts - gets all posts unsorted.
+http://159.65.116.24/status
 
-IP/sortedposts - gets all posts sorted.
+http://159.65.116.24/posts

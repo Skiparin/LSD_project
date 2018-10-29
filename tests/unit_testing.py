@@ -16,6 +16,10 @@ class unit_testing(unittest.TestCase):
         post_dict = posts()
         self.assertEquals(expected, post_dict[0]["content"])
 
+    def test_username_on_post(self):
+    	print("Testing test_username_on_post")
+    	expected = ""
+
     def test_create_post(self):
         print("Testing test_create_post")
         expected = '''{

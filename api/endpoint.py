@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/latest')
 def latest():
-    return sql_statements.get_lastest_hanesst_id()
+    return str(sql_statements.get_lastest_hanesst_id())
     
 @app.route('/post', methods=['POST'])
 def post():

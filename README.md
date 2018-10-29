@@ -26,10 +26,11 @@
 - The application should be operating atleast 95% of the time.
 - While the application is under maintenance, there should be a mechanism buffering incoming content.
 
-### **Info for the operators**
+
+## **Info for the operators**
 You can create an issue on the repository if you have any questions, or other inquiries.
 
-Alternatively you can write to any the following emails:
+Alternatively you can write to any of the following emails:
 
 og1806x9@hotmail.com
 
@@ -47,14 +48,14 @@ Sign up for the server:
  - A member of our group will then grant you non sudo access to the server.
 
 How to access log files:
- - open a terminal and type: ssh guest@159.65.116.24
- - now you are on the server go to LSD_project/api
- - here you can see our logfile.log
+ - open a terminal and type: ``ssh guest@159.65.116.24``
+ - now you are on the server, go to LSD_project: ``cd LSD_project``
+ - here you can see the logfile.log
  
-Api's to call:
+API's to call:
 
 http://159.65.116.24/home
 
-http://159.65.116.24/status
+http://159.65.116.24/project_status
 
 http://159.65.116.24/posts

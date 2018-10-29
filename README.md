@@ -39,6 +39,7 @@ tass2012@gmail.com
 
 tvh_1994@hotmail.dk
 
+
 Sign up for the server:
  - Send a mail to og1806x9@hotmail.com with your public ssh key (each member of the group has to send a key).
  - A member of our group will then grant you non sudo access to the server.

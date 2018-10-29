@@ -51,7 +51,7 @@ How to access log files:
  
 Api's to call:
 
-http://159.65.116.24/sortedposts
+http://159.65.116.24/home
 
 http://159.65.116.24/status
 

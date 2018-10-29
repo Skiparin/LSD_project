@@ -34,7 +34,7 @@ def status():
         status_code = requests.get(ip, timeout=30).status_code
         return render_template('status.html', status_code=status_code)
     except requests.ConnectionError:
-        return 'server not running'
+        return render_template('status.html', status_code=status_code) #here you should log the exception.
 
 def create_post(json_string):
     username = json_string['username']
@@ -145,12 +145,10 @@ def comment(json_string):
             
         return
 
-
-
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
-@app.route('/sortedposts')
+@app.route('/home')
 def sort_posts():
     jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)
@@ -159,4 +157,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(debug=True,host="0.0.0.0", port=5001)
+    app.run(debug=True,host="0.0.0.0", port=5004)

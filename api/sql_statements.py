@@ -223,7 +223,7 @@ def insert_user(username, password):
     con.close()
 
 def all_posts():
-    sql_stateument = f"""
+    sql_statement = f"""
     select
         *
     from

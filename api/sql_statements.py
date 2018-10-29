@@ -244,7 +244,7 @@ def get_lastest_hanesst_id():
     return last_hanesst_id
 
 def all_posts():
-    sql_stateument = f"""
+    sql_statement = f"""
     select
         *
     from

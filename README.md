@@ -27,10 +27,32 @@
 - While the application is under maintenance, there should be a mechanism buffering incoming content.
 
 ### **Info for the operators**
-IP is 159.65.116.24
+You can write to any the following emails if you have any questions:
 
+og1806x9@hotmail.com
+
+2750daugbjerg@gmail.com
+
+n_r_mikkelsen@hotmail.com
+
+tass2012@gmail.com
+
+tvh_1994@hotmail.dk
+
+
+Sign up for the server:
+ - Send a mail to og1806x9@hotmail.com with your public ssh key (each member of the group has to send a key).
+ - A member of our group will then grant you non sudo access to the server.
+
+How to access log files:
+ - open a terminal and type: ssh guest@159.65.116.24
+ - now you are on the server go to LSD_project/api
+ - here you can see our logfile.log
+ 
 Api's to call:
 
-IP/status - gets the current status code of the server.
+http://159.65.116.24/home
 
-IP/posts - gets all posts unsorted.
+http://159.65.116.24/status
+
+http://159.65.116.24/posts

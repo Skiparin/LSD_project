@@ -223,7 +223,7 @@ def insert_user(username, password):
     con.close()
 
 def get_lastest_hanesst_id():
-    sql_stateument = f"""
+    sql_statement = f"""
     SELECT
         case 
             when max(p.hanesst_id) > max(c.hanesst_id) 
@@ -239,9 +239,11 @@ def get_lastest_hanesst_id():
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
-    last_hanesst_id = sqlalchemy_object.fetchone()[0]
+    value = None
+    for sql_tuple in sqlalchemy_object:
+        value = sql_tuple[0]
     con.close()
-    return last_hanesst_id
+    return value
 
 def all_posts():
     sql_statement = f"""

@@ -150,7 +150,7 @@ def comment(json_string):
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
-@app.route('/sortedposts')
+@app.route('/')
 def sort_posts():
     jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)

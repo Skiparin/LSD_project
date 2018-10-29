@@ -27,7 +27,9 @@
 - While the application is under maintenance, there should be a mechanism buffering incoming content.
 
 ### **Info for the operators**
-You can write to any the following emails if you have any questions:
+You can create an issue on the repository if you have any questions, or other inquiries.
+
+Alternatively you can write to any the following emails:
 
 og1806x9@hotmail.com
 

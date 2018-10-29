@@ -145,12 +145,10 @@ def comment(json_string):
             
         return
 
-
-
 def sqlalchemy_json(dictionary):
 	return json.dumps([dict(r) for r in dictionary],default=str)
 
-@app.route('/')
+@app.route('/home')
 def sort_posts():
     jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)
@@ -159,4 +157,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(debug=True,host="0.0.0.0", port=5001)
+    app.run(debug=True,host="0.0.0.0", port=5004)

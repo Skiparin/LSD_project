@@ -26,8 +26,8 @@ def post():
         pollopt()
     return answere
 
-@app.route('/status')
-def status():
+@app.route('/project_status')
+def project_status():
 
     status_list = []
     """ This function returns the status code of the ip."""
@@ -38,6 +38,10 @@ def status():
         return render_template('status.html', status_list=status_list)
     except requests.ConnectionError:
         return render_template('status.html', status_list=status_list) #here you should log the exception.
+
+@app.route('/status')
+def status():
+    return "Alive"
 
 def create_post(json_string):
     username = json_string['username']

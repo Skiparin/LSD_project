@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-import sql_statements as ss
+import sql_statements as sql_statements
 import json
 import requests
 import logging
@@ -78,7 +78,7 @@ def pollopt():
 
 @app.route('/posts')
 def posts():
-    jobject = ss.all_posts()
+    jobject = sql_statements.all_posts()
     post_list = json.loads(jobject)
     return str(post_list)
 """
@@ -102,21 +102,21 @@ def create():
     username = request.form.get('acct')
     password = request.form.get('pw')
     if request.method == 'POST':
-        username_taken = ss.check_if_username_is_taken(username)
+        username_taken = sql_statements.check_if_username_is_taken(username)
         if not username_taken:
-            ss.insert_user(username, password)
+            sql_statements.insert_user(username, password)
             return render_template('frontpage.html', username=username)
         else:
             return render_template('login.html')
     elif request.method == 'GET':
-        ss.login(username, password)
+        sql_statements.login(username, password)
         return render_template('frontpage.html', username=username)
     return
 
 @app.route('/comments')
 def comments():
     post_id = request.args.get('post_id')
-    sql_dict = ss.comments_from_post(post_id)
+    sql_dict = sql_statements.comments_from_post(post_id)
     return json.dumps(sql_dict)
 
 @app.route('/comment')
@@ -153,7 +153,7 @@ def sqlalchemy_json(dictionary):
 
 @app.route('/home')
 def sort_posts():
-    jobject = ss.all_posts()
+    jobject = sql_statementsx.all_posts()
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 

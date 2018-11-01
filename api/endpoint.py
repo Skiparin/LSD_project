@@ -29,9 +29,15 @@ def post():
 @app.route('/project_status')
 def project_status():
     status_list = []
+    system_message = ""
     status_list.append(get_status_for_ip())
     status_list.append(get_connection_to_db())
-    return render_template('status.html', status_list=status_list)
+    for status in status_list:
+        if status == "200":
+            system_message = "All Systems Operational"
+        else:
+            system_message = "A system is down, check below for more info"
+    return render_template('status.html', status_list=status_list, system_message=system_message)
 
 def get_status_for_ip():
     ip = 'http://159.65.116.24/posts'

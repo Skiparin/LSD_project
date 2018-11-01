@@ -28,17 +28,30 @@ def post():
 
 @app.route('/project_status')
 def project_status():
-
     status_list = []
-    """ This function returns the status code of the ip."""
-    ip = 'http://159.65.116.24/posts'
-    try:
-        status_list.append(requests.get(ip, timeout=30).status_code)
-        status_list.append(sql_statements.make_engine())
-        return render_template('status.html', status_list=status_list)
-    except requests.ConnectionError:
-        return render_template('status.html', status_list=status_list) #here you should log the exception.
+    status_list.append(get_status_for_ip())
+    status_list.append(get_connection_to_db())
+    return render_template('status.html', status_list=status_list)
 
+def get_status_for_ip():
+    ip = 'http://159.65.116.24/posts'
+    status_code = None
+    try:
+        status_code = requests.get(ip, timeout=30).status_code
+        return status_code
+    except requests.ConnectionError as e:
+        logging.warning(e)
+        return status_code
+
+def get_connection_to_db():
+    status_code = None
+    try:
+        status_code = sql_statements.make_engine()
+        return status_code
+    except Exception as e:
+        logging.warning(e)
+        return status_code
+    
 @app.route('/status')
 def status():
     return "Alive"
@@ -151,9 +164,6 @@ def comment(json_string):
                 logging.warning(e)
             
         return
-
-def sqlalchemy_json(dictionary):
-	return json.dumps([dict(r) for r in dictionary],default=str)
 
 @app.route('/home')
 def sort_posts():

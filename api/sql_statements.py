@@ -173,6 +173,7 @@ def find_comment_with_hanesst_id(hanesst_id):
             print(str(value))
     return value
     con.close()
+
 def find_post_with_hanesst_id(hanesst_id):
     sql_statement = """
         SELECT 
@@ -189,6 +190,7 @@ def find_post_with_hanesst_id(hanesst_id):
         value = sql_tuple[0]
     con.close()
     return value
+    
 def check_if_username_is_taken(username):
     sql_statement = f"""
     select

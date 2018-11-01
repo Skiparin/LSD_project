@@ -2,27 +2,38 @@
 <html>
 <head>
 	<title>project status</title>
+	<link rel="stylesheet" type="text/css" href="/static/status.css">
 </head>
 <body>
-	<h1>System status page</h1>
-	<table>
-		<thead>
-			{{system_message}}
-		</thead>
-		<br><br>
-		<tbody>
+	<center>
+		<h1>System status page</h1>
+		<table>
+			<tr>
+				<th>
+					{{system_message}}
+				</th>
+			</tr>
 			<tr>
 				<td>
 					Posts status: {{status_list[0]}}
+					{% if status_list[0] == '400' %}
+					<span id="red-dot" class="dot"></span>
+					{% else %}
+					<span id="green-dot" class="dot"></span>
+					{% endif %}
 				</td>
 			</tr>
-			<br>
 			<tr>
 				<td>
 					Database status: {{status_list[1]}}
+					{% if status_list[1] == '400' %}
+					<span id="red-dot" class="dot"></span>
+					{% else %}
+					<span id="green-dot" class="dot"></span>
+					{% endif %}
 				</td>
 			</tr>
-		</tbody>
-	</table>
+		</table>
+	</center>
 </body>
 </html>

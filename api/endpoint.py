@@ -40,7 +40,7 @@ def project_status():
     return render_template('status.html', status_list=status_list, system_message=system_message)
 
 def get_status_for_ip():
-    ip = 'http://159.65.116.24/posts'
+    ip = 'http://159.65.116.24/home'
     status_code = None
     try:
         status_code = requests.get(ip, timeout=30).status_code

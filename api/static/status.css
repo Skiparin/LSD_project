@@ -18,7 +18,6 @@ th {
 
 td {
 	padding: 20px;
-	color: green;
 }
 
 span{
@@ -32,10 +31,18 @@ span{
   	display: inline-block;
 }
 
-#green-dot {
+#green .dot {
 	background-color: green;
 }
 
-#red-dot {
+#red .dot {
 	background-color: red;
+}
+
+#red {
+	color: red;
+}
+
+#green {
+	color: green;
 }

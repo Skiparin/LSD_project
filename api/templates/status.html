@@ -14,23 +14,23 @@
 				</th>
 			</tr>
 			<tr>
-				<td>
+				{% if status_list[0] == '400' %}
+				<td id="red">
+				{% else %}
+				<td id="green">
+				{% endif %}
 					Posts status: {{status_list[0]}}
-					{% if status_list[0] == '400' %}
-					<span id="red-dot" class="dot"></span>
-					{% else %}
-					<span id="green-dot" class="dot"></span>
-					{% endif %}
+					<span class="dot"></span>
 				</td>
 			</tr>
 			<tr>
-				<td>
+				{% if status_list[1] == '400' %}
+				<td id="red">
+				{% else %}
+				<td id="green">
+				{% endif %}
 					Database status: {{status_list[1]}}
-					{% if status_list[1] == '400' %}
-					<span id="red-dot" class="dot"></span>
-					{% else %}
-					<span id="green-dot" class="dot"></span>
-					{% endif %}
+					<span class="dot"></span>
 				</td>
 			</tr>
 		</table>

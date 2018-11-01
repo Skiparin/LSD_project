@@ -46,7 +46,8 @@ def get_status_for_ip():
 def get_connection_to_db():
     status_code = None
     try:
-        sql_statements.make_engine()
+        con = sql_statements.make_engine()
+        con.close()
         status_code = "200"
         return status_code
     except Exception as e:

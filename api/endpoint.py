@@ -46,10 +46,12 @@ def get_status_for_ip():
 def get_connection_to_db():
     status_code = None
     try:
-        status_code = sql_statements.make_engine()
+        sql_statements.make_engine()
+        status_code = "200"
         return status_code
     except Exception as e:
         logging.warning(e)
+        status_code = "400"
         return status_code
     
 @app.route('/status')

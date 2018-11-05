@@ -52,10 +52,6 @@ How to access log files:
  - now you are on the server, go to LSD_project: ``cd LSD_project``
  - here you can see the logfile.log
 
-Prometheus login:
-acc: prom
-psw: admin123
-
 API's to call:
 
 http://159.65.116.24/home

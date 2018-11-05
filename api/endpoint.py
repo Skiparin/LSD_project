@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from prometheus_client import Counter
+from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -9,6 +9,9 @@ import logging
 
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+# static information as metric
+metrics.info('app_info', 'Application info', version='1.0.3')
 
 @app.route('/latest')
 def latest():

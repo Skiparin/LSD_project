@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from prometheus_client import Summary, Gauge
+from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -9,9 +9,7 @@ import logging
 
 
 app = Flask(__name__)
-
-# Create a metric to track time spent and requests made.
-REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+metrics = PrometheusMetrics(app)
 
 @app.route('/latest')
 def latest():
@@ -182,7 +180,6 @@ def comment(json_string):
             
         return
 
-@REQUEST_TIME.time()
 @app.route('/home')
 def sort_posts():
     jobject = sql_statements.all_posts()

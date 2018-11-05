@@ -87,7 +87,9 @@ def login(username, password):
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)
-    user_id = sqlalchemy_object.fetchone()[0]
+    user_id = None
+    for sql_tuble in sqlalchemy_object:
+        user_id = sql_tuble[0]
     con.close()
     return user_id
 

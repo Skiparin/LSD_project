@@ -9,7 +9,7 @@ import logging
 
 
 app = Flask(__name__)
-monitor(app, port=5101)
+monitor(app, port=5102)
 
 @app.route('/latest')
 def latest():

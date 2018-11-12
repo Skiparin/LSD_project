@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>status</title>
+	<title>project status</title>
+	<link rel="stylesheet" type="text/css" href="/static/status.css">
 </head>
 <body>
-	<div>posts status: {{status_list[0]}}</div>
-	<div>database status: {{status_list[1]}}</div>
+	<center>
+		<h1>System status page</h1>
+		<table>
+			<tr>
+				<th>
+					{{system_message}}
+				</th>
+			</tr>
+			<tr>
+				{% if status_list[0] == '400' %}
+				<td id="red">
+				{% else %}
+				<td id="green">
+				{% endif %}
+					Flask status: {{status_list[0]}}
+					<span class="dot"></span>
+				</td>
+			</tr>
+			<tr>
+				{% if status_list[1] == '400' %}
+				<td id="red">
+				{% else %}
+				<td id="green">
+				{% endif %}
+					Database status: {{status_list[1]}}
+					<span class="dot"></span>
+				</td>
+			</tr>
+		</table>
+	</center>
 </body>
 </html>

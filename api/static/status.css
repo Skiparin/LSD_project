@@ -1,0 +1,49 @@
+table {
+	border-collapse: collapse;
+	width: 40%;
+	background-color: #FFFAF0;
+}
+
+table, td, th {
+    border: 3px inset lightgray;
+}
+
+th, td {
+    border: 1px solid lightgray;
+}
+
+th {
+	padding: 35px;
+	text-decoration: underline;
+}
+
+td {
+	padding: 20px;
+}
+
+span{
+	float: right;
+}
+
+.dot {
+	height: 20px;
+	width: 20px;
+  	border-radius: 50%;
+  	display: inline-block;
+}
+
+#green .dot {
+	background-color: green;
+}
+
+#red .dot {
+	background-color: red;
+}
+
+#red {
+	color: red;
+}
+
+#green {
+	color: green;
+}

@@ -188,5 +188,5 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    monitor(app, port=5003)
     app.run(debug=True,host="0.0.0.0", port=5004)
+    monitor(app, port=5003)

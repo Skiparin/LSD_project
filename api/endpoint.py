@@ -17,7 +17,7 @@ def latest():
 def post():
     json_string = request.get_json()
     post_type = json_string['post_type']
-    print(post_type)
+    print(json_string)
     answere = ""
     
     if(post_type == "story"):
@@ -51,7 +51,7 @@ def create_post(json_string):
     username = json_string['username']
     password = json_string['pwd_hash']
     user_id = sql_statements.login(username,password)
-    if True:
+    if user_id:
         post_title = json_string['post_title']
         hanesst_id = json_string['hanesst_id']
         post_content = json_string['post_url']
@@ -71,6 +71,10 @@ def create_post(json_string):
         
     elif user_id == None:
         print("Wrong login")
+        try:
+            sql_statements.insert_story(post_title,post_content,is_url,543903,hanesst_id)
+        except Exception as e:
+            logging.warning(e)
         return "Wrong login"
 
     #Post on frontpage
@@ -132,7 +136,7 @@ def comment(json_string):
     username = json_string['username']
     password = json_string['pwd_hash']
     user_id = sql_statements.login(username,password)
-    if True:
+    if user_id:
         content = json_string['post_text']
         post_parent = json_string['post_parent']
         hanesst_id = json_string['hanesst_id']

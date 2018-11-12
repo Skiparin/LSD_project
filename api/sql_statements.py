@@ -253,6 +253,7 @@ def all_posts():
         *
     from
         posts
+    limit 30
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)

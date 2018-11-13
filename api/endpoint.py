@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from prometheus_flask_exporter import PrometheusMetrics
+#from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -142,7 +142,7 @@ def login():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    username = request.form.get['acct']
+    username = request.form['acct']
     password = request.form['pw']
     print(username)
     print(password)

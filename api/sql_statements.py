@@ -220,12 +220,12 @@ def insert_user(username, password):
             )
     values
         (
-        {username},
-        {password}
+        :username,
+        :password''
         )
     """
     con = make_engine()
-    con.execute(sql_statement)
+    con.execute(text(sql_statement)username=username,password=password)
     con.close()
 
 def get_lastest_hanesst_id():

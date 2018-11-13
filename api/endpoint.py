@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from flask_prometheus import monitor
+from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -9,6 +9,10 @@ import logging
 
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+# static information as metric
+metrics.info('app_info', 'Application info', version='1.0.3')
 
 @app.route('/latest')
 def latest():
@@ -188,5 +192,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    monitor(app, port=5102)
     app.run(host="0.0.0.0", port=5003)

@@ -142,8 +142,10 @@ def login():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    username = request.form.get('acct')
-    password = request.form.get('pw')
+    username = request.form.get['acct']
+    password = request.form['pw']
+    print(username)
+    print(password)
     if request.method == 'POST':
         username_taken = sql_statements.check_if_username_is_taken(username)
         if not username_taken:
@@ -200,4 +202,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(host="0.0.0.0", port=5003)
+    app.run(host="0.0.0.0", port=5008)

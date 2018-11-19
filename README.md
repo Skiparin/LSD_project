@@ -59,3 +59,10 @@ http://159.65.116.24/home
 http://159.65.116.24/project_status
 
 http://159.65.116.24/posts
+
+## SLA
+
+- 95% uptime on server.
+- 3 seconds response time. (30-50 posts at max)
+- 5% or less data loss.
+

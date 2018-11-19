@@ -60,9 +60,18 @@ http://159.65.116.24/project_status
 
 http://159.65.116.24/posts
 
-## SLA
+### SLA
 
 - 95% uptime on server.
 - 3 seconds response time. (30-50 posts at max)
 - 5% or less data loss.
 
+### Grafana
+
+http://159.65.116.24:3000
+
+Username: guest
+
+Password: 1234
+
+Permissions: View Only.

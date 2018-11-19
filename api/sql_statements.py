@@ -202,9 +202,11 @@ def check_if_username_is_taken(username):
     where 
         username = '{username}'
     """
-    con = create_engine()
-    sqlalchetmy_object = con.execute(sql_statement)
-    value = sqlalchemy_object.fetchone()[0]
+    con = make_engine()
+    sqlalchemy_object = con.execute(sql_statement)
+    value = None
+    for sql_tuple in sqlalchemy_object:
+        value = sql_tuple[0]
     con.close()
     return value
 
@@ -218,12 +220,12 @@ def insert_user(username, password):
             )
     values
         (
-        {username},
-        {password}
+        :username,
+        :password''
         )
     """
     con = make_engine()
-    con.execute(sql_statement)
+    con.execute(text(sql_statement),username=username,password=password)
     con.close()
 
 def get_lastest_hanesst_id():

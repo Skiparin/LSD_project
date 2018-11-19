@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-from prometheus_flask_exporter import PrometheusMetrics
+#from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -136,10 +136,16 @@ def login():
     return json_list
 """
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    username = request.form.get('acct')
-    password = request.form.get('pw')
+    username = request.form['acct']
+    password = request.form['pw']
+    print(username)
+    print(password)
     if request.method == 'POST':
         username_taken = sql_statements.check_if_username_is_taken(username)
         if not username_taken:
@@ -196,4 +202,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5008)

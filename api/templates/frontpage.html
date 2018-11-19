@@ -33,7 +33,11 @@
               </td>
               <td style="text-align:right;padding-right:4px;">
                 <span class="pagetop">
+                  {% if g.username %}
                   <a id='login' href="/login">login</a>
+                  {% else %}
+                  <a id='logout' href="/logout">logout</a>
+                  {% endif %}
                 </span>
               </td>
             </tr>

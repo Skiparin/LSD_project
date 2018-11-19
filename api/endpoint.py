@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import render_template
-#from prometheus_flask_exporter import PrometheusMetrics
+from prometheus_flask_exporter import PrometheusMetrics
 import sql_statements as sql_statements
 import json
 import requests
@@ -202,4 +202,4 @@ def sort_posts():
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(host="0.0.0.0", port=5008)
+    app.run(host="0.0.0.0")

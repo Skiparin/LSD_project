@@ -256,11 +256,10 @@ def all_posts():
     SELECT
         *
     FROM
-        posts
-    INNER JOIN
-        users
-    ON
-        posts.user_id=users.id
+        (
+        posts INNER JOIN users
+        ON posts.user_id=users.id
+        )
     ORDER BY
         modified_on
     DESC

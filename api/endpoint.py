@@ -142,7 +142,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    return render_template('/frontpage.html', username=None)
+    sort_posts()
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():

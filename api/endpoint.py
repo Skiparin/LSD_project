@@ -140,6 +140,11 @@ def login():
 def login():
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect('/home')
+
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     username = request.form['acct']

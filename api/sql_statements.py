@@ -260,11 +260,11 @@ def all_posts():
     INNER JOIN
         users
     ON
-        posts.user_id=users.user_id
+        posts.user_id=users.id
     ORDER BY
         modified_on
     DESC
-    limit 30
+    LIMIT 30
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)

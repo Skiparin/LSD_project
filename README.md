@@ -4,7 +4,7 @@
 
 ### **Tools**
 - Database: Postgress
-- API: "To be filled" 
+- API: Flask
 - Programming Language: Python3
 - OS: Linux
 - Test: Unittest & Selenium

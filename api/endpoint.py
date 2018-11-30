@@ -142,8 +142,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
-    return redirect('/home')
+    return render_template('/frontpage.html', username=None)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():

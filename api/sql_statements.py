@@ -254,7 +254,7 @@ def get_lastest_hanesst_id():
 def all_posts():
     sql_statement = f"""
     SELECT
-        posts.*
+        posts.*,
         users.username
     FROM
         posts

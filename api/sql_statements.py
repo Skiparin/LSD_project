@@ -251,7 +251,7 @@ def get_lastest_hanesst_id():
     con.close()
     return value
 
-def all_posts():
+def all_posts(min, max):
     sql_statement = f"""
     SELECT
         posts.*,
@@ -264,7 +264,9 @@ def all_posts():
     ORDER BY
         modified_on
     DESC
-    LIMIT 30;
+    LIMIT 
+        :min,
+        :max;
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)

@@ -254,7 +254,8 @@ def get_lastest_hanesst_id():
 def all_posts():
     sql_statement = f"""
     SELECT
-        *
+        posts.*
+        users.username
     FROM
         posts
         INNER JOIN 

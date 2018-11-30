@@ -257,6 +257,9 @@ def all_posts():
         *
     from
         posts
+    order by
+        modified_on
+    desc
     limit 30
     """
     con = make_engine()

@@ -261,6 +261,9 @@ def all_posts():
         users
     WHERE
         posts.user_id=users.id
+    ORDER BY
+        modified_on
+    DESC
     LIMIT 30;
     """
     con = make_engine()

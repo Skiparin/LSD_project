@@ -251,7 +251,7 @@ def get_lastest_hanesst_id():
     con.close()
     return value
 
-def all_posts():
+def all_posts(posts_offset):
     sql_statement = f"""
     SELECT
         posts.*,
@@ -267,10 +267,10 @@ def all_posts():
     LIMIT 
         30
     OFFSET
-        30;
+        :posts_offset;
     """
     con = make_engine()
-    sqlalchemy_object = con.execute(sql_statement)
+    sqlalchemy_object = con.execute(text(sql_statement), posts_offset=posts_offset)
     posts = sqlalchemy_json(sqlalchemy_object)
     con.close()
     return posts

@@ -257,7 +257,10 @@ def all_posts():
         *
     FROM
         posts
-    INNER JOIN users ON posts.user_id=users.id
+        INNER JOIN 
+            users 
+        ON 
+            posts.user_id=users.id
     ORDER BY
         modified_on
     DESC

@@ -257,8 +257,20 @@ def all_posts():
         posts.*,
         users.username
     FROM
-        posts
-        INNER JOIN 
+        posts,
+        users
+    WHERE
+        posts.user_id=users.id
+    LIMIT 30;
+    """
+    con = make_engine()
+    sqlalchemy_object = con.execute(sql_statement)
+    posts = sqlalchemy_json(sqlalchemy_object)
+    con.close()
+    return posts
+
+    """        
+    INNER JOIN 
             users 
         ON 
             posts.user_id=users.id
@@ -268,8 +280,3 @@ def all_posts():
             users
     LIMIT 30;
     """
-    con = make_engine()
-    sqlalchemy_object = con.execute(sql_statement)
-    posts = sqlalchemy_json(sqlalchemy_object)
-    con.close()
-    return posts

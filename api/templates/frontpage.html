@@ -37,7 +37,7 @@
                   {% if g.username %}
                   <a id='login' href="/login">login</a>
                   {% else %}
-                  <a id='logout' href="/logout">logout</a>
+                  <a id='logout' href="/logout">{{g.username}} logout</a>
                   {% endif %}
                 </span>
               </td>

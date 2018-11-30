@@ -236,7 +236,7 @@ def get_lastest_hanesst_id():
             THEN max(p.hanesst_id) 
         ELSE max(c.hanesst_id) 
         end 
-    from 
+    FROM
         posts p 
         full outer join comments c
         on 
@@ -253,13 +253,17 @@ def get_lastest_hanesst_id():
 
 def all_posts():
     sql_statement = f"""
-    select
+    SELECT
         *
-    from
+    FROM
         posts
-    order by
+    INNER JOIN
+        users
+    ON
+        posts.user_id=users.user_id
+    ORDER BY
         modified_on
-    desc
+    DESC
     limit 30
     """
     con = make_engine()

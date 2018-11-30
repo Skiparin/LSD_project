@@ -196,7 +196,6 @@ def comment(json_string):
 @app.route('/home')
 def sort_posts():
     jobject = sql_statements.all_posts()
-    print(jobject)
     post_list = json.loads(jobject)
     return render_template('frontpage.html', post_list=post_list)
 

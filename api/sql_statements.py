@@ -261,7 +261,11 @@ def all_posts():
             users 
         ON 
             posts.user_id=users.id
-    LIMIT 30
+        SELECT
+            username
+        FROM
+            users
+    LIMIT 30;
     """
     con = make_engine()
     sqlalchemy_object = con.execute(sql_statement)

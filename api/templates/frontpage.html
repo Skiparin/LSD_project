@@ -89,8 +89,10 @@
             <tr>
               <td colspan="2"></td>
               <td class="title">
-                <!--{% set posts_offset = posts_offset + 29 %}-->
-                <a href="/home" class="morelink" rel="nofollow">More</a>
+                <form action="home">
+                  {% set posts_offset = posts_offset + 29 %}
+                  <a type="submit" value="home" class="morelink" rel="nofollow">More</a>
+                </form>
               </td>
             </tr>
           </table>

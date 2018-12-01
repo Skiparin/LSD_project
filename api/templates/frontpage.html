@@ -90,7 +90,7 @@
               <td colspan="2"></td>
               <td class="title">
                 <form action="home">
-                  <input type="hidden" name="posts_offset_input" value="{% set posts_offset = posts_offset + 29 %}">
+                  {% set posts_offset = posts_offset + 29 %}
                   <input type="submit" class="morelink" rel="nofollow">More</a>
                 </form>
               </td>

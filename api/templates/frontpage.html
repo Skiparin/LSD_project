@@ -53,7 +53,7 @@
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
                 <span class="rank" name="id">{{post_index}}.</span>
-                {% set post_index = post_index + 1 %}
+                {% set post_index += 1 %}
               </td>
               <td valign="top" class="votelinks">
                 <center>
@@ -90,8 +90,8 @@
             <tr>
               <td colspan="2"></td>
               <td class="title">
-                {% set posts_offset = posts_offset + 29 %}
-                {% set post_index = post_index + 1 %}
+                {% set posts_offset += 29 %}
+                {% set post_index += 1 %}
                 <a href="/home" class="morelink" rel="nofollow">More</a>
               </td>
             </tr>

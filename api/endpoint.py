@@ -196,9 +196,11 @@ def comment(json_string):
 
 @app.route('/home')
 def sort_posts(posts_offset):
+    if posts_offset = None:
+        posts_offset = 0
     jobject = sql_statements.all_posts(posts_offset)
     post_list = json.loads(jobject)
-    return render_template('frontpage.html', post_list=post_list)
+    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset)
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)

@@ -195,7 +195,7 @@ def comment(json_string):
         return
 
 @app.route('/home')
-def sort_posts(posts_offset):
+def sort_posts():
     if posts_offset == None:
         posts_offset = 0
     jobject = sql_statements.all_posts(posts_offset)

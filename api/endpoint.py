@@ -206,7 +206,7 @@ def sort_posts():
     jobject = sql_statements.all_posts(posts_offset)
     post_list = json.loads(jobject)
     print(posts_offset)
-    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset, post_index=posts_index)
+    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset, post_index=post_index)
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)

@@ -198,14 +198,14 @@ def comment(json_string):
 def sort_posts():
     try:
         if request.method == 'GET':
-            posts_offset = request.form['posts_offset']
+            post_offset = request.form['post_offset']
     except Exception as e:
-        posts_offset = 0
+        post_offset = 0
         pass
-    jobject = sql_statements.all_posts(posts_offset)
+    jobject = sql_statements.all_posts(post_offset)
     post_list = json.loads(jobject)
-    print(posts_offset)
-    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset)
+    print(post_offset)
+    return render_template('frontpage.html', post_list=post_list, post_offset=post_offset)
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)

@@ -54,7 +54,8 @@
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
                 <span class="rank" name="id">{{post_index}}.</span>
-                {% post_index = post_index + 1 %}
+                {% set post_index = post_index + 1 %}
+                {{post_index}}
               </td>
               <td valign="top" class="votelinks">
                 <center>

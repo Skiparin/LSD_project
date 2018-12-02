@@ -52,7 +52,7 @@
             {% for dict in post_list %}
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
-                {% set post_index += 1 %}
+                {% set post_index = post_index + 1 %}
                 <span class="rank" name="id">{{post_index}}.</span>
                 {{post_index}}
               </td>

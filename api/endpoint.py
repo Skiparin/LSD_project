@@ -198,6 +198,7 @@ def comment(json_string):
 def sort_posts():
     try:
         if request.method == 'POST':
+            print(teststs)
             post_offset = request.form['post_offset']
             if post_offset is None:
                 post_offset = 0

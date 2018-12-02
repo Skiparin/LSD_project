@@ -82,14 +82,14 @@
                 | <a href="" name="comments">{{dict['harnesst_id']}} comments</a>
               </td>
             </tr>
-            <tr class="spacer" style="height:5px"></tr>
-            <tr class="morespace" style="height:10px"></tr>
             <tr>
               <td colspan="2"></td>
               <td class="title">
                 <form action="home" method="post">
                   <input type="hidden" name="post_offset" value={{loop.length}}>
             {% endfor %}
+                  <tr class="spacer" style="height:5px"></tr>
+                  <tr class="morespace" style="height:10px"></tr>
                   <input href="/home" background:none padding:0 border:none type="submit" class="morelink" name="more" value="more">
                 </form>
               </td>

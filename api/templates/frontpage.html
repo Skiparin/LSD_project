@@ -87,11 +87,11 @@
             {% endfor %}
             <tr class="morespace" style="height:10px"></tr>
             <tr>
-              {% set post_offset = post_offset + 29 %}
+              <!--{% set post_offset = post_offset + 29 %}-->
               <td colspan="2"></td>
               <td class="title">
                 <form action="home" method="post">
-                  <input type="hidden" name="post_offset" value={{post_offset}}>
+                  <input type="hidden" name="post_offset" value=29>
                   <input href="/home" background:none padding:0 border:none type="submit" class="morelink" name="more" value="more">
                 </form>
               </td>

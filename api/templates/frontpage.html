@@ -83,6 +83,7 @@
               </td>
             </tr>
             <tr class="spacer" style="height:5px"></tr>
+            {% endfor %}
             <tr class="morespace" style="height:10px"></tr>
             <tr>
               <td colspan="2"></td>
@@ -91,7 +92,6 @@
                   <input type="hidden" name="post_offset" value={{loop.length}}>
                   <input href="/home" background:none padding:0 border:none type="submit" class="morelink" name="more" value="more">
                 </form>
-            {% endfor %}
               </td>
             </tr>
           </table>

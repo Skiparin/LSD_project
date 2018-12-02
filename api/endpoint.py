@@ -198,9 +198,8 @@ def comment(json_string):
 def sort_posts():
     try:
         if request.method == 'POST':
-            print(teststs)
             post_offset = request.form['post_offset']
-        else
+        else:
             post_offset = 0
     except Exception as e:
         post_offset = 0

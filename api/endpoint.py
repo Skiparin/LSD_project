@@ -194,7 +194,7 @@ def comment(json_string):
                 logging.warning(e)
         return
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def sort_posts():
     try:
         if request.method == 'POST':

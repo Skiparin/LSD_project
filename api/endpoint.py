@@ -197,7 +197,7 @@ def comment(json_string):
 @app.route('/home')
 def sort_posts():
     try:
-        if request.method == 'GET':
+        if request.method == 'POST':
             post_offset = request.form['post_offset']
     except Exception as e:
         post_offset = 0

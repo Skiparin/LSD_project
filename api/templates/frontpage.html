@@ -88,13 +88,13 @@
             <tr class="morespace" style="height:10px"></tr>
             <tr>
               {% set posts_offset = posts_offset + 29 %}
+              {{post_offset}}
               <td colspan="2"></td>
               <td class="title">
                 <form action="home" method="get">
                   <input type="hidden" name={{posts_offset}} value={{post_offset}}>
-                  <input href="/home" type="submit" class="morelink" name="more">
+                  <input href="/home" type="submit" class="morelink" name="more" value="more">
                 </form>
-                {{post_offset}}
               </td>
             </tr>
           </table>

@@ -202,11 +202,10 @@ def sort_posts():
     except Exception as e:
         posts_offset = 0
         pass
-    post_index = 0
     jobject = sql_statements.all_posts(posts_offset)
     post_list = json.loads(jobject)
     print(posts_offset)
-    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset, post_index=post_index)
+    return render_template('frontpage.html', post_list=post_list, posts_offset=posts_offset)
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)

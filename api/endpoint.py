@@ -197,7 +197,7 @@ def comment(json_string):
 @app.route('/home', methods=['GET', 'POST'])
 def sort_posts():
     if request.method == 'POST':
-        post_offset = request.form['post_offset']
+        post_offset = post_offset + 30        
     else:
         post_offset = 0
     jobject = sql_statements.all_posts(post_offset)

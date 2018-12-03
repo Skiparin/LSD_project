@@ -200,13 +200,15 @@ def sort_posts():
         post_offset = int(request.form['post_offset'])
         post_index = int(request.form['post_index'])
         post_offset = post_offset + 30
-        post_index  = post_index + 30
     else:
         post_offset = 0
         post_index  = 0
 
     jobject = sql_statements.all_posts(post_offset)
     post_list = json.loads(jobject)
+    for post_dict in post_list:
+        post_index = post_index + 1
+        post_dict.update({'post_index': post_index})
     print(post_offset)
     return render_template('frontpage.html', post_list=post_list, post_offset=post_offset, post_index=post_index)
 

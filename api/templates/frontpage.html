@@ -48,8 +48,7 @@
       <tr>
         <td>
           <table border="0" cellpadding="0" cellspacing="0" class="itemlist">
-            {% for dict in post_list %}
-            {% set post_index = {{ĺoop.index}} %}
+            {% for post_index, dict in enumerate(post_list) %}
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
                 <span class="rank" name="id">{{post_index}}.</span>

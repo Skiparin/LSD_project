@@ -51,7 +51,7 @@
             {% for dict in post_list %}
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
-                {% for indexes in loop.index %}
+                {% for indexes in enumerate(loop.index) %}
                 <span class="rank" name="id">{{indexes}}.</span>
                 {% endfor %}
               </td>

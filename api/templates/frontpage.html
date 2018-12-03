@@ -49,11 +49,10 @@
         <td>
           <table border="0" cellpadding="0" cellspacing="0" class="itemlist">
             {% for dict in post_list %}
+            {% set post_index = post_index + 1 %}
             <tr class='athing' id={{dict['id']}}>
               <td align="right" valign="top" class="title">
-                {% for indexes in enumerate(loop.index) %}
-                <span class="rank" name="id">{{indexes}}.</span>
-                {% endfor %}
+                <span class="rank" name="id">{{post_index}}.</span>
               </td>
               <td valign="top" class="votelinks">
                 <center>
@@ -92,6 +91,7 @@
               <td class="title">
                 <form action="home" method="post">
                   <input type="hidden" name="post_offset" value={{post_offset}}>
+                  <input type="hidden" name="post_index" value={{post_index}}>
                   <input href="/home" background:none padding:0 border:none type="submit" class="morelink" name="more" value="more">
                 </form>
               </td>

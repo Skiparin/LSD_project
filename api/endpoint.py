@@ -140,12 +140,14 @@ def login():
 def login():
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    return sort_posts()
+
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     username = request.form['acct']
     password = request.form['pw']
-    print(username)
-    print(password)
     if request.method == 'POST':
         username_taken = sql_statements.check_if_username_is_taken(username)
         if not username_taken:
@@ -190,16 +192,24 @@ def comment(json_string):
                 sql_statements.insert_comment_on_post(post_id, content, user_id, hanesst_id)
             except Exception as e:
                 logging.warning(e)
-            
         return
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def sort_posts():
-    jobject = sql_statements.all_posts()
+    if request.method == 'POST':
+        post_offset = int(request.form['post_offset'])
+        post_index = int(request.form['post_index'])
+        post_offset = post_offset + 30
+    else:
+        post_offset = 0
+        post_index  = 0
+    jobject = sql_statements.all_posts(post_offset)
     post_list = json.loads(jobject)
-    return render_template('frontpage.html', post_list=post_list)
-
+    for post_dict in post_list:
+        post_index = post_index + 1
+        post_dict.update({'post_index': post_index})
+    return render_template('frontpage.html', post_list=post_list, post_offset=post_offset, post_index=post_index)
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s',filename='logfile.log',level=logging.DEBUG)
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=5001, debug=True)

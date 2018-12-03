@@ -236,7 +236,7 @@ def get_lastest_hanesst_id():
             THEN max(p.hanesst_id) 
         ELSE max(c.hanesst_id) 
         end 
-    from 
+    FROM
         posts p 
         full outer join comments c
         on 
@@ -251,16 +251,38 @@ def get_lastest_hanesst_id():
     con.close()
     return value
 
-def all_posts():
+def all_posts(posts_offset):
     sql_statement = f"""
-    select
-        *
-    from
-        posts
-    limit 30
+    SELECT
+        posts.*,
+        users.username
+    FROM
+        posts,
+        users
+    WHERE
+        posts.user_id=users.id
+    ORDER BY
+        modified_on
+    DESC
+    LIMIT 
+        30
+    OFFSET
+        :posts_offset;
     """
     con = make_engine()
-    sqlalchemy_object = con.execute(sql_statement)
+    sqlalchemy_object = con.execute(text(sql_statement), posts_offset=posts_offset)
     posts = sqlalchemy_json(sqlalchemy_object)
     con.close()
     return posts
+
+    """        
+    INNER JOIN 
+            users 
+        ON 
+            posts.user_id=users.id
+        SELECT
+            username
+        FROM
+            users
+    LIMIT 30;
+    """

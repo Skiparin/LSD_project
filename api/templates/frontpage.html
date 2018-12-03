@@ -48,41 +48,43 @@
       <tr>
         <td>
           <table border="0" cellpadding="0" cellspacing="0" class="itemlist">
-            {% for post_index, dict in enumerate(post_list) %}
-            <tr class='athing' id={{dict['id']}}>
-              <td align="right" valign="top" class="title">
-                <span class="rank" name="id">{{post_index}}.</span>
-              </td>
-              <td valign="top" class="votelinks">
-                <center>
-                  <a id='votearrow' onclick='return vote(event, this, "up")' href=''>
-                    <div class='votearrow' title='upvote'></div>
-                  </a>
-                </center>
-              </td>
-              <td class="title">
-                <a href="" class="storylink" name="content">{{dict['content']}}</a>
-                <span class="sitebit comhead">
-                  (<a href="">
-                    <span class="sitestr" name="link">{{dict['is_link']}}</span>
-                  </a>
-                )</span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2"></td>
-              <td class="subtext">
-                <span class="score" name="points" id="">{{dict['karma_id']}} points</span> 
-                by <a href="" name="username" class="hnuser">{{dict['username']}}</a>
-                <span class="age">
-                  <a href="" name="post_age">{{dict['created_on']}}</a>
-                </span>
-                <span id=""></span> 
-                | <a href="" onclick="return hidestory(event, this, 18211632)">hide</a> 
-                | <a href="" name="comments">{{dict['harnesst_id']}} comments</a>
-              </td>
-            </tr>
-            <tr class="spacer" style="height:5px"></tr>
+            {% set post_index = 0 %}
+            {% for dict in post_list %}
+              {% set post_index = post_index + 1 %}
+              <tr class='athing' id={{dict['id']}}>
+                <td align="right" valign="top" class="title">
+                  <span class="rank" name="id">{{post_index}}.</span>
+                </td>
+                <td valign="top" class="votelinks">
+                  <center>
+                    <a id='votearrow' onclick='return vote(event, this, "up")' href=''>
+                      <div class='votearrow' title='upvote'></div>
+                    </a>
+                  </center>
+                </td>
+                <td class="title">
+                  <a href="" class="storylink" name="content">{{dict['content']}}</a>
+                  <span class="sitebit comhead">
+                    (<a href="">
+                      <span class="sitestr" name="link">{{dict['is_link']}}</span>
+                    </a>
+                  )</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td class="subtext">
+                  <span class="score" name="points" id="">{{dict['karma_id']}} points</span> 
+                  by <a href="" name="username" class="hnuser">{{dict['username']}}</a>
+                  <span class="age">
+                    <a href="" name="post_age">{{dict['created_on']}}</a>
+                  </span>
+                  <span id=""></span> 
+                  | <a href="" onclick="return hidestory(event, this, 18211632)">hide</a> 
+                  | <a href="" name="comments">{{dict['harnesst_id']}} comments</a>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px"></tr>
             {% endfor %}
             <tr class="morespace" style="height:10px"></tr>
             <tr>

@@ -3,5 +3,7 @@
 2. We just followed:
 https://www.digitalocean.com/community/tutorials/how-to-create-a-high-availability-setup-with-heartbeat-and-floating-ips-on-ubuntu-16-04
 
+We made 2 different servers with a floating IP. We used heartbeat to check if the main server was down. If the main server when down we used the other server. This way we don't have a "one point of failure". 
+
 There wasn't any real problems besides getting the digital ocean api token to work,
 so the guide works perfectly.

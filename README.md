@@ -8,7 +8,6 @@
 - Programming Language: Python3
 - OS: Linux
 - Test: Unittest & Selenium
-- Security "To be filled"
 - Development method: Scrum
 
 ### **Functional requirements**

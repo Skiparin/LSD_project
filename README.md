@@ -1,5 +1,7 @@
 # LSD_project
 
+### [LSD report](https://github.com/Skiparin/LSD_project/blob/master/LSD_report.md)
+
 ### [**Backlog**](https://github.com/Skiparin/LSD_project/projects/1)
 
 ### **Tools**

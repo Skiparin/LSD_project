@@ -37,6 +37,7 @@ Bagefter havde vi brug for frameworks til både frontend og backend delen af vor
 #
 ### Software design
 
+#
 ### Software implementation
 Vi vidste fra start af, at vi skulle arbejde med Flask til vores API endpoints og skrive vores kode i Python. Da vi fandt ud af at antallet af request, igennem helges api ville overstige det antal af request, som Flask kunne håndtere alene, blev vi nødt til at implementere NGINX som gjorde at vi kunne håndtere langt flere request per second. Dette skete dog meget tidligt i vores udviklingsfase så det berørte ikke noget allerede eksisterende implementering i vores projekt.
 Igennem vores forløb har vi fulgt vores funktionelle og non-funktionelle krav meget godt. Vi har fået opfyldt vores SLA, som ikke var helt opfyldt i starten, da vores response time på hjemmesiden var for langsom. Dette fik vi dog rettet. Vores endpoints blev implementere løbende samt nogle af de opgave vi blev sat for i LSD faget.
@@ -44,10 +45,12 @@ Noget vi ikke havde tage hensyn til fra start af var fra de opgaver som vi fik i
 
 ## 2) Maintenance and SLA status
 ### Hand-over
-I vores forløb som operators, fik vi udleveret et link til [dokumentationen](https://cphb-kepp.github.io/LSD/OperatorDocumentation) af projektet, som vi skulle monitorere. Her fik vi bl.a. adgang til deres forskellige endpoints og deres statusside. Vi brugte deres endpoints til kort at navigere rundt på hjemmesiden, mens vi på statussiden kunne se om de forskellige dele af projektet var oppe og køre. Her havde vi også adgang til alle deres logfiler, som frit kunne downloades. Vi fik dog ikke adgang til deres Grafana dashboard, hvilket var noget, som vi godt kunne have tænkt os. Dette var mest fordi, at vi uden Grafana ikke havde mulighed for at kontrollere om kravene fra vores SLA blev opfyldt. I starten af forløbet, virkede deres statusside heller ikke korrekt, idet den ikke viste de rigtige statusser for systemets services. Det var derfor svært for os som operators, at se tidspunktet hvor de ville crashe deres eget system, og vi kunne på den måde ikke notificere dem, da vi i starten ikke vidste at siden viste forkert. Vi kontaktede dem derefter omkring problemet, hvor vi så fik at vide, at alt kørte, men at statussiden ikke viste det korrekt. Og da vi heller ikke havde adgang til deres Grafana, kunne vi heller ikke derigennem tjekke, om deres services faktisk var gået ned eller ej. Dette fik de dog ordnet, så vi til sidst igennem statussiden kunne se at hele systemet var oppe og køre.
+I vores forløb som operators, fik vi udleveret et link til [dokumentationen](https://cphb-kepp.github.io/LSD/OperatorDocumentation) af projektet, som vi skulle monitorere. Her fik vi bl.a. adgang til deres forskellige endpoints og deres statusside. Vi brugte deres endpoints til kort at navigere rundt på hjemmesiden, mens vi på statussiden kunne se om de forskellige dele af projektet var oppe og køre. Her havde vi også adgang til alle deres logfiler, som frit kunne downloades. Vi fik dog ikke adgang til deres Grafana dashboard, da de havde problemer med at få den til at fungere, hvilket var ærgerligt, da det ville have hjulpet os meget.
 
-Alt i alt, gav den udleveret dokumentation os nogle fine midler til kunne at monitorere den anden gruppes projekt. Dog havde det været en del lettere, hvis vi kunne havde haft adgang til deres Grafana dashboard.
+I starten af forløbet, virkede deres statusside heller ikke korrekt, idet den ikke viste de rigtige statusser for systemets services. Det var derfor svært for os som operators, at se tidspunktet hvor de ville crashe deres eget system, og vi kunne på den måde ikke notificere dem, da vi i starten ikke vidste at siden viste forkert. Vi kontaktede dem derefter omkring problemet, hvor vi så fik at vide, at alt kørte, men at statussiden ikke viste det korrekt. Og da vi heller ikke havde adgang til deres Grafana, kunne vi heller ikke derigennem tjekke, om deres services faktisk var gået ned eller ej. Dette fik de dog ordnet, så vi til sidst igennem statussiden kunne se at hele systemet var oppe og køre.
 
+Alt i alt, gav den udleveret dokumentation os nogle fine midler til kunne at monitorere den anden gruppes projekt. Dog havde det hele været en del lettere, hvis vi kunne havde haft adgang til deres Grafana dashboard.
+#
 ### Service-level agreement
 Vores SLA lød som følgende:
 - 95% server uptime
@@ -64,12 +67,16 @@ Vi mente at disse 3 krav til deres system, var hvad vi kunne forvente i forhold 
 
 Selv om denne SLA er kort føler vi stadig den tager hånd om det vigtigeste ting og de ting som kunne skabe problemer igennem projektet. Med disse 3 requirements vil andre mindre og specifikke requirements også automatisk blive taget hånd om. Vi vil selvfølgelig gerne have deres database kan håndtere store mængder data og har hurtige response tider. med 5% dataloss og 3 response time vil dette blive arbejdet på for eller vil det ikke kunne opnås. 
 Den anden gruppe fandt denne SLA god. Den giver dem nogle krav der er nemme at forstår og de godt kan ses som skal arbejdes på men også mulighed for dem at lave nogle fejl og få noget pusterum til at få deres implementeringer igennem ordentligt.
-
+#
 ### Maintenance and reliability
+Det gik godt i starten, men efterhånden som vi kom længere ind i processen, endte vores operator job desværre med at blive et punkt, som vi ikke fik gjort nok ud af. Specielt, kunne vi sagtens have lavet issues på deres GitHub eller andet dokumentation. Udover det, var det også begrænset hvor meget kommunikation, der var fra den gruppe vi skulle operate på, da deres Grafana side i store dele af projektet ikke virkede ordentligt, så det betød at vi aldrig fik et Grafana endpoint af dem. Dette betød så også, at det blev meget svært at undersøge om deres system overholdte vores SLA kriterier. Da gruppen dog endelig havde fået Grafana til at virke, fik vi det tilset på deres computer, hvor alt så helt fint ud og umiddelbart overholdte vores SLA.
+
+Vi gik nogenlunde regulært ind på deres endpoints for at se om alt var oppe og køre og virkede, som det skulle. Under et af disse besøg fandt vi ud af, at hele deres system var nede bortset fra deres statussider, herinde kunne vi se at alle deres systemer så ikke virkede, herefter tog vi fat i dem for at sige hvad vi havde opdaget. Det tog dem ikke lang tid at få fixet deres problem, da vi et par dage efter så at alle deres systemer var oppe og køre igen, hvilket var positivt. Vi synes også at gruppen i det hele taget fik svaret godt på de problemer og andre spørgsmål, som vi havde angående deres services. Det eneste bagparti til dette, er det manglende endpoint til deres Grafana side, som vi ikke føler de fik håndteret korrekt, da vi gerne ville have haft et endpoint, om end senere hen i udviklingen af projektet. Det er også svært at ordenligt kunne konkludere på “reliabiliteten” på deres system, da vi aldrig fik et ordentligt indblik om de havde overholdt vores SLA kriterier, men hvis man ser bort fra denne synes vi, at de havde et system der fungerede godt, og deres videre håndtering var rigtig fin.
 
 ## 3) Discussion
 ### Technical discussion
 
+#
 ### Group work reflection & lessons learned
 
 

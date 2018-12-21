@@ -26,15 +26,15 @@ Vi satte os ned og gennemgik hvordan Hacker News var opbygget og hvilke funktion
 Vi valgte ikke at prioritere det mere visuelle på vores side, når man gik længere ind på vores hjemmeside. Vi følte ikke dette requirement var lige så stort som de andre og det ikke havde lige så stort fokus i projektet som de andre requirements.
 Vores system requirement endte dermed at være fuld support af endpoints. Svartider som ikke overskrider hvad normalt kan forventes af hjemmesider, hvilket vi valgte at være omkring 1 sekund. En frontpage som gav mulighed for at vise nyt information som var givet til websitet, hvilket vi valgte skulle være posts.
 Resterende ting ville ikke være på vores requirement liste, men vil kunne blive implementeret i løbet af systems levetid.
-
+#
 ### Development process
 Til vores projekt valgte vi at arbejde agilt. Her ville vi gøre brug af Continuous Integration i form af weekly releases. Dette gjorde at hele projektet ikke blev deployet på én gang, men derimod blev delt op i de forskellige releases. Her gjorde vi brug af noget fra Scrum, da det passede rigtig godt til at kunne lave disse weekly releases. Vi brugte GitHub’s “Projects” tool til at lave en product backlog med User Stories. Her brudte vi vores User Stories ned til forskellige tasks, for at specificere de forskellige features, vi ville udvikle under projektet. Vi opdaterede vores backlog dashboard løbende, så vi havde et overblik over, hvor langt vi var kommet med hver task og feature. Som nævnt, valgte vi kun at bruge dele af Scrum og gjorde derfor ikke brug af daglige møder og sprint reviews. Vi holdte dog stadig møder omkring projektet et par gange om ugen, da det passede med vores skolegang. Vi havde som sådan heller ikke nogen Scrum Master eller Product Owner, men blev derimod enige som gruppe, om hvad der skulle specifikt skulle laves og prioriteres i de forskellige releases. Derudover gjorde vi også brug af Pair Programming, da vi ofte sad to mand og arbejdede på den samme task eller feature.
-
+#
 ### Software architecture
 Vi havde planer om at lave en arkitektur, der kunne understøtte trafikken som vi ville få fra Hackernews simulationen. Til at starte med, ville vi se, hvilke af de værktøjer som vi normalt bruger, der kunne blive brugt til projektet. Vi startede med at have brug for et sted at gemme informationen, og vi havde i over et år brugt PostgreSQL som database, og ud fra anbefalinger fra forskellige kilder fandt vi også ud af, at PostgreSQL var mere end hurtig nok til vores behov. 
  
 Bagefter havde vi brug for frameworks til både frontend og backend delen af vores system, og her havde at vi mest brugt Flask som et API framework, men også en smule til frontend. Vi begyndte at undersøge, om det var muligt at bruge Flask til vores system. Problemet med Flask “out of the box” er, at det er single threaded og ikke kan holde på så mange requests af gangen som så mange andre frameworks. Men efter nærmere undersøgelse, fandt vi ud af, at ved at bruge uWSGI, kunne vi godt bruge Flask. uWSGI er en måde at hoste flere Python applikationer til NGINX, lighttpd, and cherokee mellem andre. Ved brug af uWSGI laver vi så et socket, som NGINX kan bruge.
-
+#
 ### Software design
 
 ### Software implementation
@@ -54,10 +54,14 @@ Vores SLA lød som følgende:
 - 3 seconds response time (30-50 posts at max)
 - 5% or less data loss
 
-Vi havde disse 3 krav vi gav til dem i forhold til vores SLA. Vi mente disse 3 requiremets til deres system var hvad vi kunne forvente i forhold til dette system med stadig have i tankerne at det er et projekt som blev arbejdet på.
-95% er stadig meget høj optime men eftersom der skulle udvikles på systemet i løbet af dets levetid vil der selvfølgelig ske ting som gjorde de fik downtime. Vi håbede selvfølgelig ikke de fik 5% downtime men hvis nu en af de nye implementering de skulle lave skabte nogle enorme problemer vil det stadig være muligt at opnå 95%.
+Vi mente at disse 3 krav til deres system, var hvad vi kunne forvente i forhold til dette projekt, mens vi stadig havde i tankerne at det er et projekt som blev arbejdet på.
+
+95% er en meget høj uptime, men eftersom der skulle udvikles på systemet i løbet af dets levetid, ville der selvfølgelig ske ting som kunne forårsage downtime. Vi håbede selvfølgelig ikke de fik 5% downtime, men hvis nu en af de nye implementering de skulle lave skabte nogle enorme problemer vil det stadig være muligt at opnå 95%.
+
 3 sekunder response time er hvad man max kan forvente som bruger på en hjemmeside. Dette både hjemmesiden skal tage requesten, behandle det i databasen, sende dataen tilbage og giver det til slut brugeren. Selv om 3 sekunder måske er lang tid som slut bruger synes vi stadig dette er et realistisk response time at gå efter selvom dette er et arbejdsprojekt.
+
 5% data loss er meget men eftersom det er et nyt projekt og der kan opstår problemer i starten og når nye implementeringer bliver lavet synes vi stadig dette er et vigtig ting at sætte som requirement men også noget vi mener gør man har det pusterum man skal bruge til et nyt projekt 
+
 Selv om denne SLA er kort føler vi stadig den tager hånd om det vigtigeste ting og de ting som kunne skabe problemer igennem projektet. Med disse 3 requirements vil andre mindre og specifikke requirements også automatisk blive taget hånd om. Vi vil selvfølgelig gerne have deres database kan håndtere store mængder data og har hurtige response tider. med 5% dataloss og 3 response time vil dette blive arbejdet på for eller vil det ikke kunne opnås. 
 Den anden gruppe fandt denne SLA god. Den giver dem nogle krav der er nemme at forstår og de godt kan ses som skal arbejdes på men også mulighed for dem at lave nogle fejl og få noget pusterum til at få deres implementeringer igennem ordentligt.
 

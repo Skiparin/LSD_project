@@ -19,8 +19,7 @@ Vores projekt består af Continuous Integration i form a weekly releases og vore
 
 Alt dette vil blive uddybet, forklaret og analyseret igennem denne rapport.
 
-## Requirements, architecture, design and process
-
+## 1) Requirements, architecture, design and process
 ### System requirements
 Vi satte os ned og gennemgik hvordan Hacker News var opbygget og hvilke funktionaliteter det havde og hvordan vi forventede det var bygget. Derefter kiggede vi på [opgavebeskrivelsen](https://github.com/datsoftlyngby/soft2018fall-lsd-teaching-material/blob/master/assignments/01-HN%20Clone%20Task%20Description.ipynb) for at få idéer til hvad vi skulle have og hvilke ting vi følte ville være fede at få med ind over. I forhold til opgavebeskrivelsen, mente vi at funktionaliteten var vigtigst, og ikke de visuelle dele af hjemmesiden. Vi valgte derfor at prioritere alle de endpoints som skulle laves og den simulation som var givet til os. Dette var det vigtigste og første vi valgte at lave i vores projekt. Derefter fokuserede vi på vores database og hvordan den kunne bygges op til at være effektiv. Dette indebar at vi skulle gøre det muligt at få svartider der var lave nok til ikke at få "timed out" på vores requests. Vi ville også gøre vi ikke havde redundant data i vores database. Til sidst ville vi lave en hjemmeside som stadig kunne vise de forskellige posts som var blevet lagt i ned i databasen på vores forside. Vi ville gerne have vi havde noget visuelt på vores side som varierede i forhold til den data som var blevet givet til os.
 
@@ -43,8 +42,7 @@ Vi vidste fra start af, at vi skulle arbejde med Flask til vores API endpoints o
 Igennem vores forløb har vi fulgt vores funktionelle og non-funktionelle krav meget godt. Vi har fået opfyldt vores SLA, som ikke var helt opfyldt i starten, da vores response time på hjemmesiden var for langsom. Dette fik vi dog rettet. Vores endpoints blev implementere løbende samt nogle af de opgave vi blev sat for i LSD faget.
 Noget vi ikke havde tage hensyn til fra start af var fra de opgaver som vi fik i LSD faget. Bl.a. Prometheus blev først implementeret i vores software senere hen, og det blev implementeret med en extension til Flask.
 
-## Maintenance and SLA status
-
+## 2) Maintenance and SLA status
 ### Hand-over
 I vores forløb som operators, fik vi udleveret et link til [dokumentationen](https://cphb-kepp.github.io/LSD/OperatorDocumentation) af projektet, som vi skulle monitorere. Her fik vi bl.a. adgang til deres forskellige endpoints og deres statusside. Vi brugte deres endpoints til kort at navigere rundt på hjemmesiden, mens vi på statussiden kunne se om de forskellige dele af projektet var oppe og køre. Her havde vi også adgang til alle deres logfiler, som frit kunne downloades. Vi fik dog ikke adgang til deres Grafana dashboard, hvilket var noget, som vi godt kunne have tænkt os. Dette var mest fordi, at vi uden Grafana ikke havde mulighed for at kontrollere om kravene fra vores SLA blev opfyldt. I starten af forløbet, virkede deres statusside heller ikke korrekt, idet den ikke viste de rigtige statusser for systemets services. Det var derfor svært for os som operators, at se tidspunktet hvor de ville crashe deres eget system, og vi kunne på den måde ikke notificere dem, da vi i starten ikke vidste at siden viste forkert. Vi kontaktede dem derefter omkring problemet, hvor vi så fik at vide, at alt kørte, men at statussiden ikke viste det korrekt. Og da vi heller ikke havde adgang til deres Grafana, kunne vi heller ikke derigennem tjekke, om deres services faktisk var gået ned eller ej. Dette fik de dog ordnet, så vi til sidst igennem statussiden kunne se at hele systemet var oppe og køre.
 
@@ -62,3 +60,15 @@ Vi havde disse 3 krav vi gav til dem i forhold til vores SLA. Vi mente disse 3 r
 5% data loss er meget men eftersom det er et nyt projekt og der kan opstår problemer i starten og når nye implementeringer bliver lavet synes vi stadig dette er et vigtig ting at sætte som requirement men også noget vi mener gør man har det pusterum man skal bruge til et nyt projekt 
 Selv om denne SLA er kort føler vi stadig den tager hånd om det vigtigeste ting og de ting som kunne skabe problemer igennem projektet. Med disse 3 requirements vil andre mindre og specifikke requirements også automatisk blive taget hånd om. Vi vil selvfølgelig gerne have deres database kan håndtere store mængder data og har hurtige response tider. med 5% dataloss og 3 response time vil dette blive arbejdet på for eller vil det ikke kunne opnås. 
 Den anden gruppe fandt denne SLA god. Den giver dem nogle krav der er nemme at forstår og de godt kan ses som skal arbejdes på men også mulighed for dem at lave nogle fejl og få noget pusterum til at få deres implementeringer igennem ordentligt.
+
+### Maintenance and reliability
+
+## 3) Discussion
+### Technical discussion
+
+### Group work reflection & lessons learned
+
+
+## Conclusion
+Ud fra dette projekt lærte vi meget om hvordan man kunne starte et større system fra bunden, med ikke andet end en kort beskrivelse af nogle requirements og et billede af slutresultatet. Vi har gennemgået mange faser i vores projekt hvor vi har skulle implementere noget nyt i form af weekly releases. Det var nogle gange noget, som vi ikke arbejdet med før, hvilket kunne blive til en udfordring, men ikke en stopklods. Vi har gjort brug af flere nye tools, som er blevet brugt til at forbedre vores applikation og vi skulle gå mere i dybden i de emner vi allerede kendte til, da vi havde operators på vores projekt. Derudover prøvede vi også kræfter med at være operators på en andens projekt, og lærte hvordan det var at vedligeholde uden at have adgang til source code.
+Forløbet udfoldte sig rigtig godt. Alle de små og store komponenter som blev implementeret, og alle udfordringer vi er blevet stillet for, har givet os en bred erfaring indenfor projektledelse og udvikling.
